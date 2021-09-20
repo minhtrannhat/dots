@@ -1,0 +1,26 @@
+[pull]
+	rebase = false
+[user]
+	email = minhtrannhat2001@gmail.com
+	name = minhtrannhat
+	signingkey = 894C6A5801E01CA9
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = master
+[gpg]
+	program = gpg2
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[delta]
+    plus-style = "syntax #012800"
+    minus-style = "syntax #340001"
+    syntax-theme = Monokai Extended
+    navigate = true
+
+[interactive]
+    diffFilter = delta --color-only
