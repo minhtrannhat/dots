@@ -39,9 +39,9 @@ lvim.lang.typescript.formatters = { { exe = "prettier" } }
 lvim.lang.typescriptreact.formatters = lvim.lang.typescript.formatters
 lvim.lang.go.formatters = { { exe = "gofmt" } }
 
-lvim.lang.javascript.linters = { { exe = "eslint" } }
+lvim.lang.javascript.linters = { { exe = "eslint_d" } }
 lvim.lang.javascriptreact.linters = lvim.lang.javascript.linters
-lvim.lang.typescript.linters = { { exe = "eslint" } }
+lvim.lang.typescript.linters = { { exe = "eslint_d" } }
 lvim.lang.typescriptreact.linters = lvim.lang.typescript.linters
 lvim.lang.lua.formatters = { { exe = "stylua" } }
 
