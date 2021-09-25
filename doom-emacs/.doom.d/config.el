@@ -16,52 +16,28 @@
 ;; + `doom-variable-pitch-font'
 ;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
 ;;   presentations or streaming.
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16))
-;; They all accept either a font-spec, font string ("Inrut Mono-12"), or xlfd
-;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16)
+      doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 26)
+      doom-variable-pitch-font (font-spec :family "Overpass" :size 16)
+      doom-unicode-font (font-spec :family "JuliaMono")
+      doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-nord)
 
 (with-eval-after-load 'doom-themes
   (doom-themes-treemacs-config))
 (setq doom-themes-treemacs-theme "doom-colors")
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
-
-;; Here are some additional functions/macros that could help you configure Doom:
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
-;;
 ;; Discord Rich Presence
 (require 'elcord)
 (elcord-mode)
 (setq elcord-use-major-mode-as-main-icon 't)
 
+;; Clangd lsp for C/C++ dev
 (setq lsp-clients-clangd-args '("-j=3"
                                 "--background-index"
                                 "--clang-tidy"
@@ -92,4 +68,35 @@
 ;; both jk and kj now works
 (setq evil-escape-unordered-key-sequence 't)
 
+;; org org
 (setq +latex-viewers '(zathura))
+
+(after! org (setq org-hide-emphasis-markers t))
+(add-hook! org-mode (electric-indent-local-mode -1))
+(add-hook! org-mode :append
+           #'visual-line-mode)
+
+;; tabs tabs
+(setq centaur-tabs-cycle-scope 'tabs)
+
+;; fish fish
+(setq vterm-shell 'fish)
+
+(defun doom-modeline-conditional-buffer-encoding ()
+  "We expect the encoding to be LF UTF-8, so only show the modeline when this is not the case"
+  (setq-local doom-modeline-buffer-encoding
+              (unless (and (memq (plist-get (coding-system-plist buffer-file-coding-system) :category)
+                                 '(coding-category-undecided coding-category-utf-8))
+                           (not (memq (coding-system-eol-type buffer-file-coding-system) '(1 2))))
+                t)))
+
+(add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
+
+(after! company
+  (setq company-idle-delay 0.5
+        company-minimum-prefix-length 2)
+  (setq company-show-numbers t)
+  (add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
+
+(setq-default history-length 1000)
+(setq-default prescient-history-length 1000)
