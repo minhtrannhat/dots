@@ -1,0 +1,220 @@
+// -*- mode: json -*-
+[
+{
+	"layer": "bottom",
+	"position": "top",
+	"modules-left": [
+		"custom/menu",
+		"custom/separator",
+		"sway/workspaces",
+		"custom/separator"
+	],
+	"modules-center": [
+		"custom/separator",
+		"clock",
+		"custom/separator",
+		"battery",
+		"custom/separator"
+	],
+	"modules-right": [
+        "tray",
+		"custom/separator",
+        "mpd",
+		"custom/separator",
+        "temperature",
+		"custom/separator",
+        "cpu",
+		"custom/separator",
+        "memory",
+		"custom/separator",
+		"sway/mode",
+		//"custom/separator",
+		//"backlight",
+		"custom/separator",
+        "network",
+		"custom/separator",
+		"pulseaudio",
+		"custom/separator"
+	],
+    "cpu": {
+        "interval": 5,
+        "tooltip": false,
+        "format": " cpu {usage}%", // Icon: microchip
+        "states": {
+          "warning": 70,
+          "critical": 90
+        }
+    },
+
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}) ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "interval": 10,
+        "consume-icons": {
+            "on": " " // Icon shows only when "consume" is on
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ", // Icon grayed out when "random" is off
+            "on": " "},
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+
+    "memory": {
+        "interval": 5,
+        "format": "memory {}%", // Icon: memory
+        "states": {
+            "warning": 70,
+            "critical": 90
+        },
+    },
+
+    "custom/menu": {
+        "tooltip-format": "Applications",
+        "tooltip": true,
+        "format": "",
+        "on-click": "wofi -p Run -L 10 -w 2 --show drun"
+    },
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 16,
+        "icon-theme": "Numix-Circle",
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close"
+    },
+    "bluetooth": {
+        "format": "{icon}",
+        "interval": 30,
+        "format-icons": {
+            "enabled": " [X]",
+            "disabled": " [ ]"
+        },
+        "tooltip-format": "{}",
+        "on-click": "blueberry"
+    },
+    "temperature": {
+        "critical-threshold": 90,
+        "interval": 5,
+        //"format": "{icon} {temperatureC}°C",
+	    "format": "{icon} {temperatureC}°",
+        "format-icons": [
+            "", // Icon: temperature-empty
+            "", // Icon: temperature-quarter
+            "", // Icon: temperature-half
+            "", // Icon: temperature-three-quarters
+            ""  // Icon: temperature-full
+        ],
+        "tooltip": false
+    },
+    "network": {
+        "interval": 5,
+        "format-wifi": " {essid} ({signalStrength}%)", // Icon: wifi
+        "format-ethernet": " {ifname}",
+        "format-disconnected": "Disconnected",
+        "tooltip": false
+    },
+	"sway/workspaces": {
+		"disable-scroll": true,
+ 		"all-outputs": true,
+ 		"format": "{name}",
+        "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": [],
+            "7": [],
+            "8": [],
+            "9": []
+        },
+		"format-icons": {
+			"urgent": "",
+			"focused": "",
+			"default": ""
+		}
+	},
+	"idle_inhibitor": {
+		"format": "{icon}",
+		"format-icons": {
+			"activated": "",
+			"deactivated": ""
+		}
+	},
+	"sway/mode": {
+		"format": "{}"
+	},
+	"backlight": {
+		"format": "{icon} {percent}%",
+		"format-icons": ["", ""],
+		"on-scroll-up": "brightnessctl set +5%",
+		"on-scroll-down": "brightnessctl set 5%-"
+	},
+	"clock": {
+		"format": "{:%H:%M}",
+		"tooltip-format": "{:%a %d %b %H:%M}",
+		"tooltip": true
+	},
+	"pulseaudio": {
+		"format": "{icon} {volume}%",
+		"format-bluetooth": "{icon} {volume}%",
+		"format-icons": {
+			"headphone": "",
+			"hands-free": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": [
+				"",
+				"",
+				""
+			]
+		},
+		"on-click": "pavucontrol"
+	},
+	"battery": {
+		"states": {
+			"good": 100,
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{icon} {capacity}%",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		]
+	},
+	"custom/separator": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/shutdown": {
+        "tooltip-format": "Power menu",
+		"format": "",
+		"on-click": "wlogout -p layer-shell -r 50",
+	},
+    "memory": {
+        "interval": 5,
+        "format": "memory {}%", // Icon: memory
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    }}
+]
