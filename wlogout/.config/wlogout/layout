@@ -1,0 +1,35 @@
+{
+    "label" : "lock",
+    "action" : "swaylock -i ~/Downloads/william-moreland-W61Rp5RouCA-unsplash.png .s fill",
+    "text" : "Lock",
+    "keybind" : "l"
+}
+{
+    "label" : "hibernate",
+    "action" : "loginctl suspend",
+    "text" : "Hibernate",
+}
+{
+    "label" : "logout",
+    "action" : "loginctl terminate-user $USER",
+    "text" : "Logout",
+    "keybind" : "e"
+}
+{
+    "label" : "shutdown",
+    "action" : "loginctl poweroff",
+    "text" : "Shutdown",
+    "keybind" : "s"
+}
+{
+    "label" : "suspend",
+    "action" : "loginctl suspend",
+    "text" : "Suspend",
+    "keybind" : "u"
+}
+{
+    "label" : "reboot",
+    "action" : "loginctl reboot",
+    "text" : "Reboot",
+    "keybind" : "r"
+}
