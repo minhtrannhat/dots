@@ -24,6 +24,7 @@ export KITTY_ENABLE_WAYLAND=1
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
+
 export GPG_TYY=$(tty)
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
