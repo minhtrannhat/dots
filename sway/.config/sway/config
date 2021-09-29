@@ -212,7 +212,7 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
-bindsym $mod+e exec emacs
+bindsym $mod+e exec emacsclient -c
 
 bindsym $mod+Right workspace next
 bindsym $mod+Left workspace prev
