@@ -22,8 +22,6 @@
       doom-unicode-font (font-spec :family "JuliaMono")
       doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
 
-(setq doom-theme 'doom-nord)
-
 (defun synchronize-theme ()
   (let* ((light-theme 'doom-nord-light)
          (dark-theme 'doom-nord)
