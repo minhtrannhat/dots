@@ -3,6 +3,7 @@ lvim.format_on_save = true
 lvim.lint_on_save = true
 lvim.colorscheme = "nord"
 lvim.shell = "/bin/fish"
+vim.opt.guifont = "JetBrainsMono Nerd Font Mono:h16"
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
