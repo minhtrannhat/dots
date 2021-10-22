@@ -1,6 +1,12 @@
 -- general
 lvim.format_on_save = true
 lvim.lint_on_save = true
+
+vim.g.nord_contrast = true
+vim.g.nord_borders = true
+vim.g.nord_disable_background = false
+vim.g.nord_italic = true
+
 lvim.colorscheme = "nord"
 lvim.shell = "/bin/fish"
 vim.opt.guifont = "JetBrainsMono Nerd Font Mono:h16"
