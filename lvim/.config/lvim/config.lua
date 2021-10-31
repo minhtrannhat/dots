@@ -39,26 +39,25 @@ lvim.lang.python.formatters = {
 
 lvim.lang.c.formatters = { { exe = "clang_format" } }
 lvim.lang.cpp.formatters = lvim.lang.c.formatters
-lvim.lang.javascript.formatters = { { exe = "prettier" } }
-lvim.lang.javascriptreact.formatters = lvim.lang.javascript.formatters
+
 lvim.lang.rust.formatters = { { exe = "rustfmt" } }
+
 lvim.lang.json.formatters = { { exe = "prettier" } }
-lvim.lang.typescript.formatters = { { exe = "prettier" } }
-lvim.lang.typescriptreact.formatters = lvim.lang.typescript.formatters
+
 lvim.lang.go.formatters = { { exe = "gofmt" } }
 
 lvim.lang.javascript.linters = { { exe = "eslint_d" } }
 lvim.lang.javascriptreact.linters = lvim.lang.javascript.linters
 lvim.lang.typescript.linters = { { exe = "eslint_d" } }
 lvim.lang.typescriptreact.linters = lvim.lang.typescript.linters
+lvim.lang.typescript.formatters = { { exe = "prettier" } }
+lvim.lang.typescriptreact.formatters = lvim.lang.typescript.formatters
+lvim.lang.javascript.formatters = { { exe = "prettier" } }
+lvim.lang.javascriptreact.formatters = lvim.lang.javascript.formatters
+
 lvim.lang.lua.formatters = { { exe = "stylua" } }
 
-lvim.lang.python.linters = {
-	{
-		exe = "flake8",
-		args = {},
-	},
-}
+lvim.lang.python.linters = { { exe = "flake8", args = {} } }
 
 -- Additional Plugins
 lvim.plugins = {
@@ -71,6 +70,7 @@ lvim.plugins = {
 		event = "InsertEnter",
 	},
 	{ "andweeb/presence.nvim" },
+	{ "tpope/vim-fugitive" },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)

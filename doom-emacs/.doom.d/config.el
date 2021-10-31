@@ -6,7 +6,7 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "Minh Tran"
+(setq user-full-name "minhtrannhat"
       user-mail-address "minhtrannhat2001@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
@@ -21,6 +21,8 @@
       doom-variable-pitch-font (font-spec :family "Overpass" :size 16)
       doom-unicode-font (font-spec :family "JuliaMono")
       doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
+
+(setq fancy-splash-image "/home/minhradz/.doom.d/marivector.png")
 
 (defun synchronize-theme ()
   (let* ((light-theme 'doom-nord-light)
@@ -148,6 +150,7 @@
 ;; Deft - a Major mode for text searching
 (setq deft-directory org-roam-directory)
 (setq deft-recursive t)
+(setq deft-default-extension "org")
 (setq deft-use-filter-string-for-filename t)
 
 ;; Function for inserting node into Org Roam
