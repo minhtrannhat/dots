@@ -6,6 +6,7 @@ vim.g.nord_contrast = true
 vim.g.nord_borders = true
 vim.g.nord_disable_background = false
 vim.g.nord_italic = true
+vim.termguicolors = true
 
 lvim.colorscheme = "nord"
 lvim.shell = "/bin/fish"
@@ -30,34 +31,30 @@ lvim.builtin.treesitter.ensure_installed = {}
 lvim.builtin.treesitter.ignore_install = { "" }
 lvim.builtin.treesitter.highlight.enabled = true
 
-lvim.lang.python.formatters = {
+local formatters = require("lvim.lsp.null-ls.formatters")
+local linters = require("lvim.lsp.null-ls.linters")
+
+formatters.setup({
 	{
 		exe = "black",
 		args = {},
 	},
-}
+	{
+		exe = "clang_format",
+		filetypes = { "c", "cpp" },
+	},
+	{
+		exe = "rustfmt",
+	},
+	{ exe = "prettier" },
+	{ exe = "gofmt" },
+	{ exe = "eslint_d" },
+	{ exe = "stylua" },
+})
 
-lvim.lang.c.formatters = { { exe = "clang_format" } }
-lvim.lang.cpp.formatters = lvim.lang.c.formatters
-
-lvim.lang.rust.formatters = { { exe = "rustfmt" } }
-
-lvim.lang.json.formatters = { { exe = "prettier" } }
-
-lvim.lang.go.formatters = { { exe = "gofmt" } }
-
-lvim.lang.javascript.linters = { { exe = "eslint_d" } }
-lvim.lang.javascriptreact.linters = lvim.lang.javascript.linters
-lvim.lang.typescript.linters = { { exe = "eslint_d" } }
-lvim.lang.typescriptreact.linters = lvim.lang.typescript.linters
-lvim.lang.typescript.formatters = { { exe = "prettier" } }
-lvim.lang.typescriptreact.formatters = lvim.lang.typescript.formatters
-lvim.lang.javascript.formatters = { { exe = "prettier" } }
-lvim.lang.javascriptreact.formatters = lvim.lang.javascript.formatters
-
-lvim.lang.lua.formatters = { { exe = "stylua" } }
-
-lvim.lang.python.linters = { { exe = "flake8", args = {} } }
+linters.setup({
+	{ exe = "flake8" },
+})
 
 -- Additional Plugins
 lvim.plugins = {
