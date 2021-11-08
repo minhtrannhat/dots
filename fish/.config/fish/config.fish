@@ -15,7 +15,7 @@ set -gx XDG_SESSION_TYPE wayland
 set -gx XDG_CURRENT_DESKTOP sway
 set -gx MOZ_ENABLE_WAYLAND 1
 
-set -gx EDITOR vim
+set -gx EDITOR nvim
 set -gx NVIM_LISTEN_ADDRESS /tmp/nvimsocket
 
 set -gx LC_ALL en_US.UTF-8
