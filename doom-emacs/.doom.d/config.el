@@ -6,7 +6,7 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
-(setq user-full-name "Minh Tran"
+(setq user-full-name "minhtrannhat"
       user-mail-address "minhtrannhat2001@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
@@ -22,7 +22,7 @@
       doom-unicode-font (font-spec :family "JuliaMono")
       doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
 
-(setq doom-theme 'doom-nord)
+(setq fancy-splash-image "/home/minhradz/.doom.d/marivector.png")
 
 (defun synchronize-theme ()
   (let* ((light-theme 'doom-nord-light)
@@ -131,3 +131,36 @@
 
 ;; Whether display the minor modes in the mode-line.
 (setq doom-modeline-minor-modes nil)
+
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+
+;; Deft - a Major mode for text searching
+(setq deft-directory org-roam-directory)
+(setq deft-recursive t)
+(setq deft-default-extension "org")
+(setq deft-use-filter-string-for-filename t)
+
+;; Function for inserting node into Org Roam
+(defun org-roam-node-insert-immediate (arg &rest args)
+  (interactive "P")
+  (let ((args (cons arg args))
+        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+                                                  '(:immediate-finish t)))))
+    (apply #'org-roam-node-insert args)))
+
+(map! :leader
+        :desc "Insert node immediately"
+        "n r I" #'org-roam-node-insert-immediate)
