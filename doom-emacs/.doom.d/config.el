@@ -28,7 +28,7 @@
   (let* ((light-theme 'doom-nord-light)
          (dark-theme 'doom-nord)
          (start-time-light-theme 6)
-         (end-time-light-theme 18)
+         (end-time-light-theme 16)
          (hour (string-to-number (substring (current-time-string) 11 13)))
          (next-theme (if (member hour (number-sequence start-time-light-theme end-time-light-theme))
                          light-theme dark-theme)))
@@ -43,6 +43,7 @@
 (setq doom-themes-treemacs-theme "doom-colors")
 
 (setq org-directory "~/org/")
+(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
 
 (setq display-line-numbers-type 'relative)
 
@@ -104,9 +105,8 @@
 (add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
 
 (after! company
-  (setq company-idle-delay 0.5
+  (setq company-idle-delay 0
         company-minimum-prefix-length 2)
-  (setq company-show-numbers t)
   (add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
 
 (setq-default history-length 1000)
