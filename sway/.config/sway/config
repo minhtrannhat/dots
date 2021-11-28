@@ -7,7 +7,9 @@
 exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
 exec mako
 exec udiskie
-exec pipewire
+exec eval (ssh-agent -c)
+exec wlsunset -S 06:30 -s 16:30 -g 0.8
+exec autotiling
 
 ### Variables
 #
@@ -25,7 +27,7 @@ set $term kitty
 # on the original workspace that the command was run on.
 set $menu wofi
 
-input 2:14:ETPS/2_Elantech_Touchpad events disabled
+input 1267:47:Elan_Touchpad events disabled
 
 # Disable titlebar
 default_border pixel 3

@@ -163,9 +163,8 @@
 		"on-scroll-down": "brightnessctl set 5%-"
 	},
 	"clock": {
-		"format": "{:%H:%M}",
-		"tooltip-format": "{:%a %d %b %H:%M}",
-		"tooltip": true
+		"format": "{:%a %d %b %H:%M}",
+		"tooltip": false
 	},
 	"pulseaudio": {
 		"format": "{icon} {volume}%",

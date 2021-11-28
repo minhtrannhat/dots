@@ -25,8 +25,8 @@ export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 
+alias mpv="mpv --hwdec=vaapi"
+
 export GPG_TYY=$(tty)
 
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-source "$HOME/.cargo/env"
 eval "$(starship init bash)"
