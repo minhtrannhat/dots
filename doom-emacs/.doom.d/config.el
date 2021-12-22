@@ -16,7 +16,7 @@
 ;; + `doom-variable-pitch-font'
 ;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
 ;;   presentations or streaming.
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16)
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18)
       doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 26)
       doom-variable-pitch-font (font-spec :family "Overpass" :size 16)
       doom-unicode-font (font-spec :family "JuliaMono")
@@ -24,19 +24,7 @@
 
 (setq fancy-splash-image "/home/minhradz/.doom.d/marivector.png")
 
-(defun synchronize-theme ()
-  (let* ((light-theme 'doom-nord-light)
-         (dark-theme 'doom-nord)
-         (start-time-light-theme 6)
-         (end-time-light-theme 16)
-         (hour (string-to-number (substring (current-time-string) 11 13)))
-         (next-theme (if (member hour (number-sequence start-time-light-theme end-time-light-theme))
-                         light-theme dark-theme)))
-    (when (not (equal doom-theme next-theme))
-      (setq doom-theme next-theme)
-      (load-theme next-theme t))))
-
-(run-with-timer 0 900 'synchronize-theme)
+(setq doom-theme 'doom-nord)
 
 (with-eval-after-load 'doom-themes
   (doom-themes-treemacs-config))
@@ -164,3 +152,5 @@
 (map! :leader
         :desc "Insert node immediately"
         "n r I" #'org-roam-node-insert-immediate)
+
+(setq inhibit-x-resources t)
