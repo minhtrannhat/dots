@@ -37,7 +37,8 @@ local linters = require("lvim.lsp.null-ls.linters")
 formatters.setup({
 	{
 		exe = "black",
-		args = {},
+		filetypes = { "python" },
+		args = { "--quiet", "--fast", "-" },
 	},
 	{
 		exe = "clang_format",

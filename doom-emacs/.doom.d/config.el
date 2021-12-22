@@ -24,7 +24,19 @@
 
 (setq fancy-splash-image "/home/minhradz/.doom.d/marivector.png")
 
-(setq doom-theme 'doom-nord)
+(defun synchronize-theme ()
+(let* ((light-theme 'doom-nord-light)
+        (dark-theme 'doom-nord)
+        (start-time-light-theme 6)
+        (end-time-light-theme 16)
+        (hour (string-to-number (substring (current-time-string) 11 13)))
+        (next-theme (if (member hour (number-sequence start-time-light-theme end-time-light-theme))
+                light-theme dark-theme)))
+        (when (not (equal doom-theme next-theme))
+                (setq doom-theme next-theme)
+        (load-theme next-theme t))))
+
+(run-with-timer 0 900 'synchronize-theme)
 
 (with-eval-after-load 'doom-themes
   (doom-themes-treemacs-config))
@@ -152,5 +164,3 @@
 (map! :leader
         :desc "Insert node immediately"
         "n r I" #'org-roam-node-insert-immediate)
-
-(setq inhibit-x-resources t)
