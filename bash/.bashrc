@@ -25,7 +25,9 @@ export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 
-alias mpv="mpv --hwdec=vaapi"
+alias arduino="_JAVA_AWT_WM_NONREPARENTING=1 arduino"
+
+export VDPAU_DRIVER=va_gl
 
 export GPG_TYY=$(tty)
 
