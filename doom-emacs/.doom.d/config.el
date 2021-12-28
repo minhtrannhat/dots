@@ -38,6 +38,9 @@
 
 (run-with-timer 0 900 'synchronize-theme)
 
+(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+
 (with-eval-after-load 'doom-themes
   (doom-themes-treemacs-config))
 (setq doom-themes-treemacs-theme "doom-colors")
@@ -46,11 +49,6 @@
 (add-hook! 'elfeed-search-mode-hook 'elfeed-update)
 
 (setq display-line-numbers-type 'relative)
-
-;; Discord Rich Presence
-(require 'elcord)
-(elcord-mode)
-(setq elcord-use-major-mode-as-main-icon 't)
 
 ;; Clangd lsp for C/C++ dev
 (setq lsp-clients-clangd-args '("-j=3"
@@ -75,10 +73,7 @@
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
-;; for verifying commits with gpg
-(use-package! pinentry
-        :init (setq epg-pinentry-mode `loopback)
-            (pinentry-start))
+(setq epg-pinentry-mode 'loopback)
 
 ;; both jk and kj now works
 (setq evil-escape-unordered-key-sequence 't)
@@ -105,8 +100,7 @@
 (add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
 
 (after! company
-  (setq company-idle-delay 0
-        company-minimum-prefix-length 2)
+  (setq company-idle-delay 1)
   (add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
 
 (setq-default history-length 1000)
@@ -164,3 +158,7 @@
 (map! :leader
         :desc "Insert node immediately"
         "n r I" #'org-roam-node-insert-immediate)
+
+(setq avy-all-windows 't)
+
+(lsp-treemacs-sync-mode 1)

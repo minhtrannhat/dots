@@ -4,12 +4,31 @@
 #
 # Read `man 5 sway` for a complete reference.
 #
+
+# dbus stuffs that idc
 exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
+
+# notification 
 exec mako
+
+# mounting external hard drives
 exec udiskie
+
+# ssh-agent yayy no password
 exec eval (ssh-agent -c)
+
+# night light and some gamma decrease 
+# exec wlsunset -L 45.5 -l 73.5 -g 0.8
 exec wlsunset -S 06:30 -s 16:30 -g 0.8
+
+# bspwm throw back
 exec autotiling
+
+# window manager
+exec env RUST_BACKTRACE=1 swayrd > /tmp/swayrd.log 2>&1
+
+# gpg-agent
+exec eval (gpg-agent -c)
 
 ### Variables
 #
@@ -21,7 +40,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term kitty
+set $term kitty -1
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -61,13 +80,10 @@ output HDMI-A-2 res 1920x1080 position 1920,0
 #
 
 ### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#         timeout 300 'swaylock -f -c 000000' \
-#         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#         before-sleep 'swaylock -f -c 000000'
+exec swayidle -w \
+        timeout 300 'swaylock -f -c 000000' \
+        timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+        before-sleep 'swaylock -f -c 000000'
 
 for_window [title="Firefox — Sharing Indicator"] floating enable
 for_window [title="Firefox — Sharing Indicator"] nofocus
@@ -218,6 +234,8 @@ bindsym $mod+e exec emacsclient -nc
 
 bindsym $mod+Right workspace next
 bindsym $mod+Left workspace prev
+
+bindsym $mod+Tab exec swayr next-window current-workspace
 
 #
 # Status Bar:
