@@ -11,7 +11,8 @@
  '(smtpmail-smtp-service 25)
  '(warning-suppress-log-types '((iedit) (iedit) (iedit) (iedit) (iedit) (iedit) (iedit)))
  '(warning-suppress-types
-   '((org-load-hook)
+   '((org-element-cache)
+     (org-load-hook)
      (org-load-hook)
      (iedit)
      (iedit)

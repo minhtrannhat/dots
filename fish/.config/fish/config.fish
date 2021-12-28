@@ -29,6 +29,6 @@ set -gx LC_ALL en_US.UTF-8
 
 set -gx _JAVA_AWT_WM_NONREPARENTING 1
 
-set -x PATH /usr/libexec /usr/local/bin /home/minhradz/.cargo/bin /home/minhradz/.local/bin /home/minhradz/go/bin $PATH
+set -x PATH /usr/libexec /usr/local/bin /home/minhradz/.cargo/bin /home/minhradz/.local/bin /home/minhradz/go/bin /home/minhradz/.cabal/bin $PATH
 
 starship init fish | source
