@@ -18,8 +18,7 @@ exec udiskie
 exec eval (ssh-agent -c)
 
 # night light and some gamma decrease 
-# exec wlsunset -L 45.5 -l 73.5 -g 0.8
-exec wlsunset -S 06:30 -s 16:30 -g 0.8
+exec wlsunset -l 45.6 -L -73.5 -g 0.8
 
 # bspwm throw back
 exec autotiling
@@ -254,3 +253,4 @@ bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86MonBrightnessDown exec light -U 10
 bindsym XF86AudioNext exec mpc next
 bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioStop exec mpc toggle
