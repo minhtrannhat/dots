@@ -36,6 +36,8 @@
                 (setq doom-theme next-theme)
         (load-theme next-theme t))))
 
+(setq doom-nord-light-region-highlight 't)
+
 (run-with-timer 0 900 'synchronize-theme)
 
 (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
@@ -46,7 +48,6 @@
 (setq doom-themes-treemacs-theme "doom-colors")
 
 (setq org-directory "~/org/")
-(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
 
 (setq display-line-numbers-type 'relative)
 
@@ -66,12 +67,12 @@
 (custom-set-variables
  '(git-gutter:update-interval 1))
 
-;; tree-sitter syntax highlighting
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+;; ;; tree-sitter syntax highlighting
+;; (use-package! tree-sitter
+;;   :config
+;;   (require 'tree-sitter-langs)
+;;   (global-tree-sitter-mode)
+;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (setq epg-pinentry-mode 'loopback)
 
@@ -81,10 +82,10 @@
 ;; org org
 (setq +latex-viewers '(zathura))
 
-(after! org (setq org-hide-emphasis-markers t))
-(add-hook! org-mode (electric-indent-local-mode -1))
-(add-hook! org-mode :append
-           #'visual-line-mode)
+;; (after! org (setq org-hide-emphasis-markers t))
+;; (add-hook! org-mode (electric-indent-local-mode -1))
+;; (add-hook! org-mode :append
+;;            #'visual-line-mode)
 
 ;; fish fish
 (setq vterm-shell 'fish)
@@ -162,3 +163,7 @@
 (setq avy-all-windows 't)
 
 (lsp-treemacs-sync-mode 1)
+
+(setq highlight-indent-guides-method 'bitmap)
+
+(add-to-list 'auto-mode-alist '("\.m$" . octave-mode))
