@@ -15,7 +15,7 @@ exec mako
 exec udiskie
 
 # ssh-agent yayy no password
-exec eval (ssh-agent -c)
+exec fish_ssh_agent
 
 # night light and some gamma decrease 
 exec wlsunset -l 45.6 -L -73.5 -g 0.8
