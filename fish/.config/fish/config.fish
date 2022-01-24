@@ -10,6 +10,16 @@ alias qutebrowser 'qutebrowser --qt-flag ignore-gpu-blocklist --qt-flag enable-g
 
 export GPG_TTY=(tty)
 
+gpgconf --launch gpg-agent
+
+# config.fish
+if test -z (pgrep ssh-agent)
+  eval (ssh-agent -c)
+  set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
+  set -Ux SSH_AGENT_PID $SSH_AGENT_PID
+  set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
+end
+
 set -gx MOZ_WEBRENDER 1
 set -gx XDG_SESSION_TYPE wayland
 set -gx XDG_CURRENT_DESKTOP sway
@@ -24,7 +34,7 @@ set -Ux XMODIFIERS @im=ibus
 
 set -gx EDITOR lvim
 set -gx NVIM_LISTEN_ADDRESS /tmp/nvimsocket
-
+set -gx MANPAGER "lvim +Man!"
 set -gx LC_ALL en_US.UTF-8
 
 set -gx _JAVA_AWT_WM_NONREPARENTING 1
