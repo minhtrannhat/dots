@@ -82,11 +82,6 @@
 ;; org org
 (setq +latex-viewers '(zathura))
 
-;; (after! org (setq org-hide-emphasis-markers t))
-;; (add-hook! org-mode (electric-indent-local-mode -1))
-;; (add-hook! org-mode :append
-;;            #'visual-line-mode)
-
 ;; fish fish
 (setq vterm-shell 'fish)
 
@@ -161,6 +156,11 @@
         "n r I" #'org-roam-node-insert-immediate)
 
 (setq avy-all-windows 't)
+
+;; Disables lsp-signature-auto-activate globally
+(after! lsp-mode
+  (setq lsp-signature-auto-activate nil))
+
 
 (lsp-treemacs-sync-mode 1)
 

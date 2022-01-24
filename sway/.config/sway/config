@@ -14,9 +14,6 @@ exec mako
 # mounting external hard drives
 exec udiskie
 
-# ssh-agent yayy no password
-exec fish_ssh_agent
-
 # night light and some gamma decrease 
 exec wlsunset -l 45.6 -L -73.5 -g 0.8
 
@@ -25,9 +22,6 @@ exec autotiling
 
 # window manager
 exec env RUST_BACKTRACE=1 swayrd > /tmp/swayrd.log 2>&1
-
-# gpg-agent
-exec eval (gpg-agent -c)
 
 ### Variables
 #
@@ -86,7 +80,10 @@ exec swayidle -w \
 
 for_window [title="Firefox — Sharing Indicator"] floating enable
 for_window [title="Firefox — Sharing Indicator"] nofocus
-#
+for_window [app_id="mpv"] inhibit_idle visible; border none; max_render_time off
+for_window [class="firefox"] inhibit_idle fullscreen; max_render_time off
+for_window [app_id="firefox"] inhibit_idle fullscreen; max_render_time off
+
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
