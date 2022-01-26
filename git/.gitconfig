@@ -9,7 +9,7 @@
 [init]
 	defaultBranch = master
 [gpg]
-	program = gpg2
+	program = /usr/bin/gpg
 [pager]
     diff = delta
     log = delta
