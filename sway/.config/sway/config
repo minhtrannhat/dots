@@ -248,6 +248,6 @@ bindsym XF86AudioLowerVolume exec pulsemixer --change-volume -2 && pulsemixer --
 bindsym XF86AudioMute exec pulsemixer --toggle-mute && ( pulsemixer --get-mute && echo 0 > $SWAYSOCK.wob ) || pamixer --get-volume > $SWAYSOCK.wob
 bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86MonBrightnessDown exec light -U 10
-bindsym XF86AudioNext exec mpc next
-bindsym XF86AudioPrev exec mpc prev
-bindsym XF86AudioStop exec mpc toggle
+bindsym XF86AudioNext exec mpc --host=192.168.0.100 --port=6600 next
+bindsym XF86AudioPrev exec mpc --host=192.168.0.100 --port=6600 prev
+bindsym XF86AudioStop exec mpc --host=192.168.0.100 --port=6600 toggle

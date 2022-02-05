@@ -6,6 +6,7 @@ alias rm 'rm -i'
 alias nnn 'nnn -e'
 alias icat 'kitty +kitten icat'
 alias magit 'emacs -nw --eval "(magit-status)"'
+alias emac 'emacsclient -nw'
 alias qutebrowser 'qutebrowser --qt-flag ignore-gpu-blocklist --qt-flag enable-gpu-rasterization --qt-flag enable-native-gpu-memory-buffers --qt-flag num-raster-threads=4'
 
 export GPG_TTY=(tty)
@@ -42,3 +43,5 @@ set -gx _JAVA_AWT_WM_NONREPARENTING 1
 set -x PATH /usr/libexec /usr/local/bin /home/minhradz/.cargo/bin /home/minhradz/.local/bin /home/minhradz/go/bin /home/minhradz/.cabal/bin $PATH
 
 starship init fish | source
+
+direnv hook fish | source
