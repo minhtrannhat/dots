@@ -44,12 +44,13 @@ formatters.setup({
 	},
 	{
 		exe = "rustfmt",
+		filetype = { "rust" },
 	},
 	{ exe = "prettier" },
-	{ exe = "gofmt" },
+	{ exe = "gofmt", filetypes = { "go" } },
 	{ exe = "eslint_d" },
-	{ exe = "stylua" },
-	{ exe = "brittany" },
+	{ exe = "stylua", filetypes = { "lua" } },
+	{ exe = "brittany", filetypes = { "haskell" } },
 })
 
 linters.setup({

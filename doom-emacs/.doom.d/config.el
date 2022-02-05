@@ -74,6 +74,7 @@
 ;;   (global-tree-sitter-mode)
 ;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
+;; gpg
 (setq epg-pinentry-mode 'loopback)
 
 ;; both jk and kj now works
@@ -137,11 +138,16 @@
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
 
-;; Deft - a Major mode for text searching
-(setq deft-directory org-roam-directory)
-(setq deft-recursive t)
-(setq deft-default-extension "org")
-(setq deft-use-filter-string-for-filename t)
+
+(defun org-roam-rg-search ()
+  "Search org-roam directory using consult-ripgrep. With live-preview."
+  (interactive)
+  (let ((consult-ripgrep-command "rg --null --ignore-case --type org --line-buffered --color=always --max-columns=500 --no-heading --line-number . -e ARG OPTS"))
+    (consult-ripgrep org-roam-directory)))
+
+(map! :leader
+        :desc "Search org-roam with consult-ripgrep"
+        "n r F" #'org-roam-rg-search)
 
 ;; Function for inserting node into Org Roam
 (defun org-roam-node-insert-immediate (arg &rest args)
@@ -160,7 +166,6 @@
 ;; Disables lsp-signature-auto-activate globally
 (after! lsp-mode
   (setq lsp-signature-auto-activate nil))
-
 
 (lsp-treemacs-sync-mode 1)
 
