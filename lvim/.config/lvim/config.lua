@@ -69,6 +69,13 @@ lvim.plugins = {
 	},
 	{ "machakann/vim-sandwich" },
 	{ "tpope/vim-fugitive" },
+	{
+		"lewis6991/spellsitter.nvim",
+		config = function()
+			require("spellsitter").setup()
+		end,
+	},
+	{ "ggandor/lightspeed.nvim", requires = { "tpope/vim-repeat" }, event = "InsertEnter" },
 }
 
 -- Changes to clangd
@@ -88,8 +95,6 @@ local clangd_flags = {
 	"--offset-encoding=utf-16",
 	"--clang-tidy-checks=-*,llvm-*,clang-analyzer-*,modernize-*,-modernize-use-trailing-return-type",
 	"--fallback-style=Google",
-	-- "--header-insertion=never",
-	-- "--query-driver=<list-of-white-listed-complers>"
 }
 
 local clangd_bin = "clangd"
@@ -106,3 +111,6 @@ local opts = {
 }
 
 require("lvim.lsp.manager").setup("clangd", opts)
+
+-- vim sandwhich with vim surround keybindings
+vim.cmd("runtime macros/sandwich/keymap/surround.vim")

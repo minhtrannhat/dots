@@ -21,11 +21,11 @@
        company           ; the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       ;;ivy               ; a search engine for love and life
-       vertico           ; the search engine of the future
+       ivy               ; a search engine for love and life
+       ;;vertico           ; the search engine of the future
 
        :ui
-       deft              ; notational velocity for Emacs
+       ;;deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
@@ -45,7 +45,7 @@
        unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
-       window-select     ; visually switch windows
+       (window-select +numbers)     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
        zen               ; distraction-free coding or writing
 
@@ -84,15 +84,15 @@
        :tools
        ;;ansible
        ;;debugger          ; FIXME stepping through code, to help you add bugs
-       ;;direnv
-       docker
+       direnv
+       (docker +lsp)
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        gist              ; interacting with github gists
-       lookup              ; navigate your code and its documentation
+       (lookup +dictionary + docsets +offline)              ; navigate your code and its documentation
        lsp               ; M-x vscode
-       magit             ; a git porcelain for Emacs
+       (magit +forge)             ; a git porcelain for Emacs
        make              ; run make tasks from Emacs
        (pass +auth)             ; password manager for nerds
        pdf               ; pdf enhancements
@@ -155,7 +155,7 @@
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6
-       ;;rest              ; Emacs as a REST client
+       rest              ; Emacs as a REST client
        ;;rst               ; ReST in peace
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        (rust +lsp)              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()

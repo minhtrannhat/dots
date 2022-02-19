@@ -42,7 +42,7 @@ set $menu wofi
 input 1267:47:Elan_Touchpad events disabled
 
 # Disable titlebar
-default_border pixel 3
+default_border pixel 5
 
 font pango:FiraCodeNerdFontMono Regular 11
 
