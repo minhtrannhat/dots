@@ -7,13 +7,11 @@ alias nnn 'nnn -e'
 alias icat 'kitty +kitten icat'
 alias magit 'emacs -nw --eval "(magit-status)"'
 alias emac 'emacsclient -nw'
-alias qutebrowser 'qutebrowser --qt-flag ignore-gpu-blocklist --qt-flag enable-gpu-rasterization --qt-flag enable-native-gpu-memory-buffers --qt-flag num-raster-threads=4'
 
 export GPG_TTY=(tty)
 
 gpgconf --launch gpg-agent
 
-# config.fish
 if test -z (pgrep ssh-agent)
   eval (ssh-agent -c)
   set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK

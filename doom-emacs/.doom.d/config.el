@@ -22,6 +22,9 @@
       doom-unicode-font (font-spec :family "JuliaMono")
       doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
 
+(setq doom-emoji-fallback-font-families nil)
+(setq doom-symbol-fallback-font-families nil)
+
 (setq fancy-splash-image "/home/minhradz/.doom.d/marivector.png")
 
 (defun synchronize-theme ()
@@ -65,7 +68,7 @@
 
 ;; update the git gutter
 (custom-set-variables
- '(git-gutter:update-interval 1))
+ '(git-gutter:update-interval 0.02))
 
 ;; ;; tree-sitter syntax highlighting
 ;; (use-package! tree-sitter
@@ -138,6 +141,13 @@
           org-roam-ui-update-on-save t
           org-roam-ui-open-on-start t))
 
+(setq org-roam-dailies-directory "daily/")
+
+(setq org-roam-dailies-capture-templates
+      '(("d" "default" entry
+         "* %?"
+         :target (file+head "%<%Y-%m-%d>.org"
+                            "#+title: %<%Y-%m-%d>\n"))))
 
 (defun org-roam-rg-search ()
   "Search org-roam directory using consult-ripgrep. With live-preview."
@@ -164,11 +174,21 @@
 (setq avy-all-windows 't)
 
 ;; Disables lsp-signature-auto-activate globally
+;; Looking at you, rustic mode
 (after! lsp-mode
   (setq lsp-signature-auto-activate nil))
 
+;; this never worked lol
 (lsp-treemacs-sync-mode 1)
 
+;; bitmap very funni
 (setq highlight-indent-guides-method 'bitmap)
 
-(add-to-list 'auto-mode-alist '("\.m$" . octave-mode))
+;; magit delta looks so good
+(add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1)))
+
+;; keybind to disable search highlighting (like :set noh)
+(map! :leader
+      :desc "Clear search highlight"
+      "s c"
+      #'evil-ex-nohighlight)
