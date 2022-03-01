@@ -54,6 +54,12 @@
 
 (setq display-line-numbers-type 'relative)
 
+(add-hook 'spell-fu-mode-hook
+  (lambda ()
+    (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en"))
+    (spell-fu-dictionary-add
+      (spell-fu-get-personal-dictionary "en-personal" "/home/minhradz/.aspell.en.pws"))))
+
 ;; Clangd lsp for C/C++ dev
 (setq lsp-clients-clangd-args '("-j=3"
                                 "--background-index"
@@ -103,6 +109,12 @@
   (setq company-idle-delay 1)
   (add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
 
+(use-package all-the-icons-ivy-rich
+  :init (all-the-icons-ivy-rich-mode 1))
+
+(use-package ivy-rich
+  :init (ivy-rich-mode 1))
+
 (setq-default history-length 1000)
 (setq-default prescient-history-length 1000)
 
@@ -147,7 +159,7 @@
       '(("d" "default" entry
          "* %?"
          :target (file+head "%<%Y-%m-%d>.org"
-                            "#+title: %<%Y-%m-%d>\n"))))
+                            "#+title: %<%Y-%m-%d>\n* What I did today\n* What was on my mind"))))
 
 (defun org-roam-rg-search ()
   "Search org-roam directory using consult-ripgrep. With live-preview."
@@ -173,7 +185,7 @@
 
 (setq avy-all-windows 't)
 
-;; Disables lsp-signature-auto-activate globally
+;; Disables lsp-signature-auto-activate
 ;; Looking at you, rustic mode
 (after! lsp-mode
   (setq lsp-signature-auto-activate nil))
@@ -192,3 +204,18 @@
       :desc "Clear search highlight"
       "s c"
       #'evil-ex-nohighlight)
+
+;; We do a little bit of finger pointing
+(use-package blamer
+  :bind (("s-i" . blamer-show-commit-info))
+  :defer 20
+  :custom
+  (blamer-idle-time 0.3)
+  (blamer-min-offset 40)
+  :custom-face
+  (blamer-face ((t :foreground "#7a88cf"
+                    :background nil
+                    :height 110
+                    :italic t)))
+  :config
+  (global-blamer-mode 1))

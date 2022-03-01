@@ -1,17 +1,7 @@
 -- general
 lvim.format_on_save = true
 lvim.lint_on_save = true
-
-vim.g.nord_contrast = true
-vim.g.nord_borders = true
-vim.g.nord_disable_background = false
-vim.g.nord_italic = true
-vim.termguicolors = true
-
-lvim.colorscheme = "nord"
 lvim.shell = "/bin/fish"
-
--- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
@@ -19,12 +9,17 @@ lvim.builtin.autopairs.active = true
 lvim.builtin.gitsigns.active = true
 lvim.builtin.dap.active = true
 vim.opt.relativenumber = true
-
 lvim.builtin.nvimtree.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 1
 lvim.builtin.terminal.shell = "/bin/fish"
 
--- if you don't want all the parsers change this to a table of the ones you want
+vim.g.nord_contrast = true
+vim.g.nord_borders = true
+vim.g.nord_disable_background = false
+vim.g.nord_italic = true
+vim.termguicolors = true
+lvim.colorscheme = "nord"
+
 lvim.builtin.treesitter.ensure_installed = {}
 lvim.builtin.treesitter.ignore_install = { "" }
 lvim.builtin.treesitter.highlight.enabled = true
