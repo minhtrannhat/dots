@@ -13,12 +13,9 @@ lvim.builtin.nvimtree.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 1
 lvim.builtin.terminal.shell = "/bin/fish"
 
-vim.g.nord_contrast = true
-vim.g.nord_borders = true
-vim.g.nord_disable_background = false
-vim.g.nord_italic = true
 vim.termguicolors = true
-lvim.colorscheme = "nord"
+vim.background = "dark"
+lvim.colorscheme = "gruvbox"
 
 lvim.builtin.treesitter.ensure_installed = {}
 lvim.builtin.treesitter.ignore_install = { "" }
@@ -54,7 +51,7 @@ linters.setup({
 
 -- Additional Plugins
 lvim.plugins = {
-	{ "shaunsingh/nord.nvim" },
+	{ "ellisonleao/gruvbox.nvim" },
 	{
 		"ray-x/lsp_signature.nvim",
 		config = function()

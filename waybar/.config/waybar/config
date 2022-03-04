@@ -1,39 +1,38 @@
-// -*- mode: json -*-
-[
+// Angelo's Waybar config
+// https://github.com/angelofallars/dotfiles
+
 {
-	"layer": "bottom",
-	"position": "top",
-	"modules-left": [
-		"custom/menu",
-		"custom/separator",
-		"sway/workspaces",
-		"custom/separator"
-	],
-	"modules-center": [
-		"custom/separator",
-		"clock",
-		"custom/separator",
-		"battery",
-		"custom/separator"
-	],
-	"modules-right": [
-        "tray",
-		"custom/separator",
-        "temperature",
-		"custom/separator",
-        "cpu",
-		"custom/separator",
-        "memory",
-		"custom/separator",
-		"sway/mode",
-		//"custom/separator",
-		//"backlight",
-		"custom/separator",
-        "network",
-		"custom/separator",
-		"pulseaudio",
-		"custom/separator"
-	],
+    "layer": "bottom",
+    "height": 33,
+    "spacing": 0,
+    "margin-top": 4,
+
+    // If you're using sway, replace `river/tags` with `sway/workspaces` .
+
+    "modules-left": ["sway/workspaces"],
+    "modules-right": ["tray","cpu", "memory", "battery", "clock#date", "clock", "pulseaudio"],
+
+     "sway/workspaces": {
+         "disable-scroll": true,
+         "disable-markup" : false,
+         "all-outputs": true,
+         "format": "  {icon}  ",
+         //"format":"{icon}",
+         "format-icons": {
+             "1": "一",
+             "2": "二",
+             "3": "三",
+             "4": "四",
+             "5": "五",
+             "6": "六",
+             "7": "七",
+             "8": "八",
+             "9": "九",
+             "10": "十",
+             "focused": "",
+             "default": ""
+         }
+     },
     "cpu": {
         "interval": 5,
         "tooltip": false,
@@ -52,117 +51,13 @@
         },
     },
 
-    "custom/menu": {
-        "tooltip-format": "Applications",
-        "tooltip": true,
-        "format": "",
-        "on-click": "wofi -p Run -L 10 -w 2 --show drun"
-    },
-    "wlr/taskbar": {
-        "format": "{icon}",
-        "icon-size": 16,
-        "icon-theme": "Numix-Circle",
-        "tooltip-format": "{title}",
-        "on-click": "activate",
-        "on-click-middle": "close"
-    },
-    "bluetooth": {
-        "format": "{icon}",
-        "interval": 30,
-        "format-icons": {
-            "enabled": " [X]",
-            "disabled": " [ ]"
-        },
-        "tooltip-format": "{}",
-        "on-click": "blueberry"
-    },
-    "temperature": {
-        "critical-threshold": 90,
-        "interval": 5,
-        //"format": "{icon} {temperatureC}°C",
-	    "format": "{icon} {temperatureC}°",
-        "format-icons": [
-            "", // Icon: temperature-empty
-            "", // Icon: temperature-quarter
-            "", // Icon: temperature-half
-            "", // Icon: temperature-three-quarters
-            ""  // Icon: temperature-full
-        ],
-        "tooltip": false
-    },
-    "network": {
-        "interval": 5,
-        "format-wifi": " {essid} ({signalStrength}%)", // Icon: wifi
-        "format-ethernet": " {ifname}",
-        "format-disconnected": "Disconnected",
-        "tooltip": false
-    },
-	"sway/workspaces": {
-		"disable-scroll": true,
- 		"all-outputs": true,
- 		"format": "{name}",
-        "persistent_workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": [],
-            "6": [],
-            "7": [],
-            "8": [],
-            "9": []
-        },
-		"format-icons": {
-			"urgent": "",
-			"focused": "",
-			"default": ""
-		}
-	},
-	"idle_inhibitor": {
-		"format": "{icon}",
-		"format-icons": {
-			"activated": "",
-			"deactivated": ""
-		}
-	},
-	"sway/mode": {
-		"format": "{}"
-	},
-	"backlight": {
-		"format": "{icon} {percent}%",
-		"format-icons": ["", ""],
-		"on-scroll-up": "brightnessctl set +5%",
-		"on-scroll-down": "brightnessctl set 5%-"
-	},
-	"clock": {
-		"format": "{:%a %d %b %H:%M}",
-		"tooltip": false
-	},
-	"pulseaudio": {
-		"format": "{icon} {volume}%",
-		"format-bluetooth": "{icon} {volume}%",
-		"format-icons": {
-			"headphone": "",
-			"hands-free": "",
-			"headset": "",
-			"phone": "",
-			"portable": "",
-			"car": "",
-			"default": [
-				"",
-				"",
-				""
-			]
-		},
-		"on-click": "pavucontrol"
-	},
-	"battery": {
+  "battery": {
 		"states": {
 			"good": 100,
 			"warning": 30,
 			"critical": 15
 		},
-		"format": "{icon} {capacity}%",
+		"format": "{icon}  {capacity}%",
 		"format-icons": [
 			"",
 			"",
@@ -171,21 +66,34 @@
 			""
 		]
 	},
-	"custom/separator": {
-		"format": "",
-		"tooltip": false
+
+    "tray": {
+        // "icon-size": 21,
+        // "spacing": 10
+    },
+
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%I:%M %p}",
+    },
+
+    "clock#date": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%B %d, %A}",
+    },
+
+    "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "format-bluetooth": "{icon} {volume}%",
+      "format-icons": {
+        "headphone": "",
+        "default": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "on-click": "pavucontrol"
 	},
-	"custom/shutdown": {
-        "tooltip-format": "Power menu",
-		"format": "",
-		"on-click": "wlogout -p layer-shell -r 50",
-	},
-    "memory": {
-        "interval": 5,
-        "format": "memory {}%", // Icon: memory
-        "states": {
-            "warning": 70,
-            "critical": 90
-        }
-    }}
-]
+}
+

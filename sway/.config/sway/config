@@ -23,6 +23,11 @@ exec autotiling
 # window manager
 exec env RUST_BACKTRACE=1 swayrd > /tmp/swayrd.log 2>&1
 
+#============================clipman=====================================================
+exec wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman/clipman-primary.json"
+exec clipman restore
+exec wl-paste -t text --watch clipman store
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -39,35 +44,30 @@ set $term kitty -1
 # on the original workspace that the command was run on.
 set $menu wofi
 
-input 1267:47:Elan_Touchpad events disabled
-
 # Disable titlebar
 default_border pixel 5
 
 font pango:FiraCodeNerdFontMono Regular 11
 
-# Window decoration
-# class                 border  backgr. text    indicator child_border
-client.focused          #5e81ac #5e81ac #eceff4 #434c5e   #5e81ac
-client.focused_inactive #4c566a #4c566a #d8dee9 #3b4252   #434c5e
-client.unfocused        #4c566a #4c566a #d8dee9 #3b4252   #434c5e
-client.urgent           #bf616a #bf616a #eceff4 #900000   #bf616a
-client.placeholder      #000000 #0c0c0c #eceff4 #000000   #0c0c0c
+ # # class                   border      bground     text        indicator   child_border
+client.focused             #F3722C      #EBDBB2     #3C3836     #D65D0E     #FE8019
+client.unfocused           #3C3836      #3C3836     #EBDBB2     #CC241D     #504945
+client.focused_inactive    #3C3836      #EBDBB2     #3C3836     #000000     #00000000
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
-gaps inner 12
-gaps outer 5
+gaps inner 6
+gaps outer 3
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/minhradz/Downloads/william-moreland-W61Rp5RouCA-unsplash.png fill
+output * bg /home/minhradz/Downloads/lantern.jpg fill
 #
 # Example configuration:
 #
 
-output eDP-1 pos 0 0 res 1920x1080
-output HDMI-A-2 res 1920x1080 position 1920,0
+output LVDS-1 pos 0 0 res 1366x768
+output DP-1 res 1920x1080 position 1366,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 #
@@ -122,7 +122,10 @@ for_window [app_id="jellyfinmediaplayer"] inhibit_idle fullscreen; max_render_ti
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec exec wlogout -p layer-shell
+    bindsym $mod+Shift+e exec exec nwgbar
+
+    # clipboard manager
+    bindsym $mod+p exec clipman pick -t wofi
 #
 # Moving around:
 #
@@ -249,6 +252,3 @@ bindsym XF86AudioLowerVolume exec pulsemixer --change-volume -2 && pulsemixer --
 bindsym XF86AudioMute exec pulsemixer --toggle-mute && ( pulsemixer --get-mute && echo 0 > $SWAYSOCK.wob ) || pamixer --get-volume > $SWAYSOCK.wob
 bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86MonBrightnessDown exec light -U 10
-bindsym XF86AudioNext exec mpc --host=192.168.0.100 --port=6600 next
-bindsym XF86AudioPrev exec mpc --host=192.168.0.100 --port=6600 prev
-bindsym XF86AudioStop exec mpc --host=192.168.0.100 --port=6600 toggle

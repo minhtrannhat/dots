@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "minhtrannhat"
-      user-mail-address "minhtrannhat2001@gmail.com")
+      user-mail-address "minhtrannhat@tutanota.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -28,8 +28,8 @@
 (setq fancy-splash-image "/home/minhradz/.doom.d/marivector.png")
 
 (defun synchronize-theme ()
-(let* ((light-theme 'doom-nord-light)
-        (dark-theme 'doom-nord)
+(let* ((light-theme 'doom-gruvbox-light)
+        (dark-theme 'doom-gruvbox)
         (start-time-light-theme 6)
         (end-time-light-theme 16)
         (hour (string-to-number (substring (current-time-string) 11 13)))
@@ -142,11 +142,7 @@
     :after org-roam)
 
 (use-package! org-roam-ui
-    :after org-roam ;; or :after org
-;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
-;;         a hookable mode anymore, you're advised to pick something yourself
-;;         if you don't care about startup time, use
-;;  :hook (after-init . org-roam-ui-mode)
+    :after org-roam
     :config
     (setq org-roam-ui-sync-theme t
           org-roam-ui-follow t

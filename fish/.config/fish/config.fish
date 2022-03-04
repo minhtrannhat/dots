@@ -1,6 +1,5 @@
 set fish_greeting
-fish_vi_key_bindings
-set fish_bind_mode insert
+theme_gruvbox dark medium
 
 alias rm 'rm -i'
 alias nnn 'nnn -e'
