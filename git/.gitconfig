@@ -19,8 +19,6 @@
 [delta]
     side-by-side = true
     line-numbers = true
-    plus-style = "syntax #012800"
-    minus-style = "syntax #340001"
     syntax-theme = Nord
     navigate = true
 

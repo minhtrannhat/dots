@@ -56,5 +56,3 @@
 (package! org-roam-ui :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
 (package! magit-delta)
 (package! blamer :recipe (:host github :repo "artawower/blamer.el"))
-(package! all-the-icons-ivy-rich)
-(package! ivy-rich)

@@ -28,8 +28,8 @@
 (setq fancy-splash-image "/home/minhradz/.doom.d/marivector.png")
 
 (defun synchronize-theme ()
-(let* ((light-theme 'doom-nord-light)
-        (dark-theme 'doom-nord)
+(let* ((light-theme 'modus-operandi)
+        (dark-theme 'doom-palenight)
         (start-time-light-theme 6)
         (end-time-light-theme 16)
         (hour (string-to-number (substring (current-time-string) 11 13)))
@@ -108,12 +108,6 @@
 (after! company
   (setq company-idle-delay 1)
   (add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
-
-(use-package all-the-icons-ivy-rich
-  :init (all-the-icons-ivy-rich-mode 1))
-
-(use-package ivy-rich
-  :init (ivy-rich-mode 1))
 
 (setq-default history-length 1000)
 (setq-default prescient-history-length 1000)
@@ -219,3 +213,5 @@
                     :italic t)))
   :config
   (global-blamer-mode 1))
+
+(add-hook 'after-make-frame-functions #'doom-modeline-set-selected-window)
