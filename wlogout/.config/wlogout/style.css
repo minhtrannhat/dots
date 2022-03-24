@@ -1,52 +1,51 @@
 * {
-	background-image: none;
-}
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
+    background-image: none;
 }
 window {
-  background-color: rgba(46,52,64, 0.9);
-  font-size: 26px;
-  font-family: Product Sans;
-  animation: fadeIn;
-  animation-duration: 0.5s;
+    background-image: image(url("/home/minhradz/Downloads/lantern.jpg"), url("/home/minhradz/Downloads/lantern.jpg"));
 }
 button {
-  color: #eceff4;
-  background-color: #4c566a;
-	border-style: solid;
-  margin: 20px;
-  border: 3px solid #3b4252;
-	background-repeat: no-repeat;
-	background-position: center;
+    background-color: #2e3440;
+    border-width: 0px;
+    border-radius: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25%;
+    color: #5e81ac;
 }
 
-button:focus, button:active, button:hover {
-  background-color: #5e81ac;
-	outline-style: none;
+button:active, button:hover {
+    background-color: #4c566a;
+    color: #81a1c1;
+    outline-style: none;
 }
 
 #lock {
-    background-image: image(url("/home/minhradz/.config/wlogout/icons/lock.png"), url("/usr/local/share/wlogout/icons/lock.png"));
+    opacity: 0.9;
+    background-image: image(url("/usr/share/wlogout/icons/logout.png"), url("/usr/share/wlogout/icons/logout.png"));
 }
 
 #logout {
-    background-image: image(url("/home/minhradz/.config/wlogout/icons/logout.png"), url("/usr/local/share/wlogout/icons/logout.png"));
+    opacity: 0.9;
+    background-image: image(url("/usr/share/wlogout/icons/logout.png"), url("/usr/local/share/wlogout/icons/logout.png"));
 }
 
 #suspend {
-    background-image: image(url("/home/minhradz/.config/wlogout/icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));
+    opacity: 0.9;
+    background-image: image(url("/usr/share/wlogout/icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));
 }
 
 #hibernate {
-    background-image: image(url("/home/minhradz/.config/wlogout/icons/hibernate.png"), url("/usr/local/share/wlogout/icons/hibernate.png"));
+    opacity: 0.9;
+    background-image: image(url("/usr/share/wlogout/icons/hibernate.png"), url("/usr/local/share/wlogout/icons/hibernate.png"));
 }
 
 #shutdown {
-    background-image: image(url("/home/minhradz/.config/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
+    opacity: 0.9;
+    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
 }
 
 #reboot {
-    background-image: image(url("/home/minhradz/.config/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
+    opacity: 0.9;
+    background-image: image(url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
 }

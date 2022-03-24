@@ -85,9 +85,6 @@ for_window [app_id="soffice.bin"] inhibit_idle visible; border none; max_render_
 for_window [class="firefox"] inhibit_idle fullscreen; max_render_time off
 for_window [app_id="firefox"] inhibit_idle fullscreen; max_render_time off
 for_window [app_id="jellyfinmediaplayer"] inhibit_idle fullscreen; max_render_time off
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
 #
@@ -122,10 +119,12 @@ for_window [app_id="jellyfinmediaplayer"] inhibit_idle fullscreen; max_render_ti
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec exec nwgbar
+    bindsym $mod+Shift+e exec exec wlogout
 
     # clipboard manager
     bindsym $mod+p exec clipman pick -t wofi
+
+    bindsym $mod+t exec firefox
 #
 # Moving around:
 #
@@ -186,7 +185,6 @@ for_window [app_id="jellyfinmediaplayer"] inhibit_idle fullscreen; max_render_ti
 
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
-    bindsym $mod+t layout toggle split
 
     bindsym $mod+Shift+space floating toggle
     # Make the current focus fullscreen

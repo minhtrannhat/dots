@@ -3,18 +3,20 @@ lvim.format_on_save = true
 lvim.lint_on_save = true
 lvim.shell = "/bin/fish"
 lvim.leader = "space"
-lvim.builtin.dashboard.active = true
+vim.opt.relativenumber = true
+
+lvim.builtin.alpha.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.autopairs.active = true
 lvim.builtin.gitsigns.active = true
 lvim.builtin.dap.active = true
-vim.opt.relativenumber = true
+
 lvim.builtin.nvimtree.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 1
 lvim.builtin.terminal.shell = "/bin/fish"
 
 vim.termguicolors = true
-vim.background = "dark"
+vim.background = "light"
 lvim.colorscheme = "gruvbox"
 
 lvim.builtin.treesitter.ensure_installed = {}
@@ -68,6 +70,7 @@ lvim.plugins = {
 		end,
 	},
 	{ "ggandor/lightspeed.nvim", requires = { "tpope/vim-repeat" }, event = "InsertEnter" },
+	{ "ellisonleao/glow.nvim" },
 }
 
 -- Changes to clangd

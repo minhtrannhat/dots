@@ -1,23 +1,24 @@
 {
     "label" : "lock",
-    "action" : "swaylock -i ~/Downloads/william-moreland-W61Rp5RouCA-unsplash.png .s fill",
+    "action" : "swaylock -c ~/.config/swaylock/config",
     "text" : "Lock",
     "keybind" : "l"
 }
 {
     "label" : "hibernate",
-    "action" : "systemctl suspend",
+    "action" : "systemctl hibernate",
     "text" : "Hibernate",
+    "keybind" : "h"
 }
 {
     "label" : "logout",
-    "action" : "swaymsg exit",
+    "action" : "loginctl terminate-user $USER",
     "text" : "Logout",
     "keybind" : "e"
 }
 {
     "label" : "shutdown",
-    "action" : "shutdown now",
+    "action" : "systemctl poweroff",
     "text" : "Shutdown",
     "keybind" : "s"
 }

@@ -1,5 +1,8 @@
 set fish_greeting
-theme_gruvbox dark medium
+fish_vi_key_bindings
+set fish_bind_mode insert
+
+theme_gruvbox dark hard
 
 alias rm 'rm -i'
 alias nnn 'nnn -e'
@@ -23,8 +26,6 @@ set -gx XDG_SESSION_TYPE wayland
 set -gx XDG_CURRENT_DESKTOP sway
 set -gx MOZ_ENABLE_WAYLAND 1
 set -gx QT_AUTO_SCREEN_SCALE_FACTOR 1
-
-set -gx VDPAU_DRIVER va_gl
 
 set -Ux GTK_IM_MODULE ibus
 set -Ux QT_IM_MODULE ibus

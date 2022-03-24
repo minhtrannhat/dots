@@ -25,8 +25,20 @@ export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 
-export VDPAU_DRIVER=va_gl
-
 export GPG_TYY=$(tty)
 
+alias rm='rm -i'
+alias nnn='nnn -e'
+alias magit='emacs -nw --eval "(magit-status)"'
+alias emac='emacsclient -nw'
+
+gpgconf --launch gpg-agent
+
+export EDITOR=/home/minhradz/.local/bin/lvim
+export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
+export MANPAGER="lvim +Man!"
+export LC_ALL=en_US.UTF-8
+
+eval "$(direnv hook bash)"
 eval "$(starship init bash)"
+export PATH="/home/minhradz/.cargo/bin;/home/minhradz/.local/bin;/home/minhradz/go/bin;/home/minhradz/.cabal/bin:$PATH"
