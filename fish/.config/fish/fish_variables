@@ -2,10 +2,10 @@
 # VERSION: 3.0
 SETUVAR --export GTK_IM_MODULE:ibus
 SETUVAR --export QT_IM_MODULE:ibus
-SETUVAR --export SSH_AGENT_PID:1235
-SETUVAR --export SSH_AUTH_SOCK:/tmp/ssh\x2dXXXXXXRu0Qxq/agent\x2e1234
+SETUVAR --export SSH_AGENT_PID:1262
+SETUVAR --export SSH_AUTH_SOCK:/tmp/ssh\x2dXXXXXXOEdXXn/agent\x2e1261
 SETUVAR --export XMODIFIERS:\x40im\x3dibus
-SETUVAR __fish_initialized:3100
+SETUVAR __fish_initialized:3400
 SETUVAR fish_color_autosuggestion:93a1a1
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:586e75
@@ -34,3 +34,4 @@ SETUVAR fish_pager_color_completion:green
 SETUVAR fish_pager_color_description:B3A06D
 SETUVAR fish_pager_color_prefix:cyan\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
+SETUVAR fish_pager_color_selected_background:\x2dr

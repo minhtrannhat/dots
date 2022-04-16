@@ -1,6 +1,6 @@
 auto-reload yes
 browser "firefox --new-tab %u"
-max-items 50
+max-items 1000
 
 # unbind keys
 unbind-key ENTER

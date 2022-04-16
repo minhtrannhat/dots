@@ -18,7 +18,7 @@ exec udiskie
 exec wlsunset -l 45.6 -L -73.5 -g 0.8
 
 # bspwm throw back
-exec autotiling
+exec /home/minhradz/.local/bin/autotiling
 
 # window manager
 exec env RUST_BACKTRACE=1 swayrd > /tmp/swayrd.log 2>&1
@@ -82,9 +82,9 @@ for_window [title="Firefox — Sharing Indicator"] floating enable
 for_window [title="Firefox — Sharing Indicator"] nofocus
 for_window [app_id="mpv"] inhibit_idle visible; border none; max_render_time off
 for_window [app_id="soffice.bin"] inhibit_idle visible; border none; max_render_time off
-for_window [class="firefox"] inhibit_idle fullscreen; max_render_time off
 for_window [app_id="firefox"] inhibit_idle fullscreen; max_render_time off
 for_window [app_id="jellyfinmediaplayer"] inhibit_idle fullscreen; max_render_time off
+for_window [app_id="zathura"] inhibit_idle visible; max_render_time off
 
 ### Input configuration
 #
