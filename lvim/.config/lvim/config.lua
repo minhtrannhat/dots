@@ -9,6 +9,7 @@ lvim.builtin.alpha.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.autopairs.active = true
 lvim.builtin.gitsigns.active = true
+lvim.builtin.notify.active = true
 lvim.builtin.dap.active = true
 
 lvim.builtin.nvimtree.side = "left"
@@ -16,7 +17,7 @@ lvim.builtin.nvimtree.show_icons.git = 1
 lvim.builtin.terminal.shell = "/bin/fish"
 
 vim.termguicolors = true
-vim.background = "light"
+vim.background = "dark"
 lvim.colorscheme = "gruvbox"
 
 lvim.builtin.treesitter.ensure_installed = {}
@@ -27,82 +28,82 @@ local formatters = require("lvim.lsp.null-ls.formatters")
 local linters = require("lvim.lsp.null-ls.linters")
 
 formatters.setup({
-	{
-		exe = "black",
-		filetypes = { "python" },
-		args = { "--quiet", "--fast", "-" },
-	},
-	{
-		exe = "clang_format",
-		filetypes = { "c", "cpp" },
-	},
-	{
-		exe = "rustfmt",
-		filetype = { "rust" },
-	},
-	{ exe = "prettier" },
-	{ exe = "gofmt", filetypes = { "go" } },
-	{ exe = "eslint_d" },
-	{ exe = "stylua", filetypes = { "lua" } },
-	{ exe = "brittany", filetypes = { "haskell" } },
+  {
+    exe = "black",
+    filetypes = { "python" },
+    args = { "--quiet", "--fast", "-" },
+  },
+  {
+    exe = "clang_format",
+    filetypes = { "c", "cpp" },
+  },
+  {
+    exe = "rustfmt",
+    filetype = { "rust" },
+  },
+  { exe = "prettier" },
+  { exe = "gofmt", filetypes = { "go" } },
+  { exe = "eslint_d" },
+  { exe = "stylua", filetypes = { "lua" } },
+  { exe = "brittany", filetypes = { "haskell" } },
 })
 
 linters.setup({
-	{ exe = "flake8" },
+  { exe = "flake8" },
 })
 
 -- Additional Plugins
 lvim.plugins = {
-	{ "ellisonleao/gruvbox.nvim" },
-	{
-		"ray-x/lsp_signature.nvim",
-		config = function()
-			require("lsp_signature").on_attach()
-		end,
-		event = "InsertEnter",
-	},
-	{ "machakann/vim-sandwich" },
-	{ "tpope/vim-fugitive" },
-	{
-		"lewis6991/spellsitter.nvim",
-		config = function()
-			require("spellsitter").setup()
-		end,
-	},
-	{ "ggandor/lightspeed.nvim", requires = { "tpope/vim-repeat" }, event = "InsertEnter" },
-	{ "ellisonleao/glow.nvim" },
+  { "ellisonleao/gruvbox.nvim" },
+  {
+    "ray-x/lsp_signature.nvim",
+    config = function()
+      require("lsp_signature").on_attach()
+    end,
+    event = "InsertEnter",
+  },
+  { "machakann/vim-sandwich" },
+  { "tpope/vim-fugitive" },
+  {
+    "lewis6991/spellsitter.nvim",
+    config = function()
+      require("spellsitter").setup()
+    end,
+  },
+  { "ggandor/lightspeed.nvim", requires = { "tpope/vim-repeat" }, event = "InsertEnter" },
+  { "ellisonleao/glow.nvim" },
 }
 
 -- Changes to clangd
-vim.list_extend(lvim.lsp.override, { "clangd" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
 
 -- some settings can only passed as commandline flags `clangd --help`
 local clangd_flags = {
-	"--all-scopes-completion",
-	"--suggest-missing-includes",
-	"--background-index",
-	"--pch-storage=disk",
-	"--cross-file-rename",
-	"--log=info",
-	"--completion-style=detailed",
-	"--enable-config", -- clangd 11+ supports reading from .clangd configuration file
-	"--clang-tidy",
-	"--offset-encoding=utf-16",
-	"--clang-tidy-checks=-*,llvm-*,clang-analyzer-*,modernize-*,-modernize-use-trailing-return-type",
-	"--fallback-style=Google",
+  "--all-scopes-completion",
+  "--suggest-missing-includes",
+  "--background-index",
+  "--pch-storage=disk",
+  "--cross-file-rename",
+  "--log=info",
+  "--completion-style=detailed",
+  "--enable-config", -- clangd 11+ supports reading from .clangd configuration file
+  "--clang-tidy",
+  "--offset-encoding=utf-16",
+  "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*,modernize-*,-modernize-use-trailing-return-type",
+  "--fallback-style=Google",
 }
 
 local clangd_bin = "clangd"
 
 local custom_on_attach = function(client, bufnr)
-	require("lvim.lsp").common_on_attach(client, bufnr)
-	local opts = { noremap = true, silent = true }
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lh", "<Cmd>ClangdSwitchSourceHeader<CR>", opts)
+  require("lvim.lsp").common_on_attach(client, bufnr)
+  local opts = { noremap = true, silent = true }
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lh", "<Cmd>ClangdSwitchSourceHeader<CR>", opts)
 end
 
 local opts = {
-	cmd = { clangd_bin, unpack(clangd_flags) },
-	on_attach = custom_on_attach,
+  cmd = { clangd_bin, unpack(clangd_flags) },
+  on_attach = custom_on_attach,
 }
 
 require("lvim.lsp.manager").setup("clangd", opts)

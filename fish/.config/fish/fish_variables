@@ -2,8 +2,8 @@
 # VERSION: 3.0
 SETUVAR --export GTK_IM_MODULE:ibus
 SETUVAR --export QT_IM_MODULE:ibus
-SETUVAR --export SSH_AGENT_PID:1262
-SETUVAR --export SSH_AUTH_SOCK:/tmp/ssh\x2dXXXXXXOEdXXn/agent\x2e1261
+SETUVAR --export SSH_AGENT_PID:1050
+SETUVAR --export SSH_AUTH_SOCK:/tmp/ssh\x2dXXXXXXF1IpnD/agent\x2e1049
 SETUVAR --export XMODIFIERS:\x40im\x3dibus
 SETUVAR __fish_initialized:3400
 SETUVAR fish_color_autosuggestion:93a1a1

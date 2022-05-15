@@ -15,8 +15,7 @@ export GPG_TTY=(tty)
 gpgconf --launch gpg-agent
 
 if test -z (pgrep ssh-agent)
-  eval (ssh-agent -c)
-  set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
+  eval (ssh-agent -c) set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
   set -Ux SSH_AGENT_PID $SSH_AGENT_PID
   set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
 end
@@ -38,7 +37,7 @@ set -gx LC_ALL en_US.UTF-8
 
 set -gx _JAVA_AWT_WM_NONREPARENTING 1
 
-set -x PATH /usr/libexec /usr/local/bin /home/minhradz/.cargo/bin /home/minhradz/.local/bin /home/minhradz/go/bin /home/minhradz/.cabal/bin $PATH
+set -x PATH /usr/libexec /usr/local/bin /home/minhradz/.cargo/bin /home/minhradz/.local/bin /home/minhradz/go/bin /home/minhradz/.cabal/bin /home/minhradz/.local/share/gem/ruby/3.0.0/bin $PATH
 
 starship init fish | source
 
