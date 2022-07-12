@@ -18,18 +18,18 @@
 }
 
 #workspaces button {
-  color: #d8a657;
+  color: #b48ead;
   margin: 0;
   padding: 1px 1px 0px 1px;
 }
 
 #workspaces button.focused {
-  border: 1px solid #e78a4e;
+  border: 1px solid #b48ead;
 }
 
 window#waybar {
   background: transparent;
-  color: #e78a4e;
+  color: #b48ead;
 }
 
 .modules-left, .modules-center, .modules-right {
@@ -119,16 +119,16 @@ tooltip {
   animation-duration: 0.2s;
   border: 2px solid #787878;
   text-shadow: none;
-  color: #e78a4e;
+  color: #b48ead;
 }
 
 tooltip label {
-  color: #e78a4e;
+  color: #b48ead;
 }
 
 #tray menu {
   background: #464646;
-  color: #e78a4e;
+  color: #b48ead;
   border-radius: 5px;
   border: 2px solid #787878;
 }

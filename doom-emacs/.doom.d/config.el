@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "minhtrannhat"
-      user-mail-address "minhtrannhat2001@gmail.com")
+      user-mail-address "minhtrannhat@minhtrannhat.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -25,11 +25,14 @@
 (setq doom-emoji-fallback-font-families nil)
 (setq doom-symbol-fallback-font-families nil)
 
+(add-hook 'prog-mode-hook #'pixel-scroll-mode)
+(add-hook 'text-mode-hook #'pixel-scroll-mode)
+
 (setq fancy-splash-image "/home/minhradz/.doom.d/marivector.png")
 
 (defun synchronize-theme ()
-(let* ((light-theme 'doom-gruvbox-light)
-        (dark-theme 'doom-gruvbox)
+(let* ((light-theme 'doom-nord-light)
+        (dark-theme 'doom-nord)
         (start-time-light-theme 6)
         (end-time-light-theme 16)
         (hour (string-to-number (substring (current-time-string) 11 13)))
@@ -81,6 +84,13 @@
 ;;   (global-tree-sitter-mode)
 ;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
+(global-tree-sitter-mode)
+(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+
+(require 'elcord)
+(elcord-mode)
+(setq elcord-use-major-mode-as-main-icon 't)
+
 ;; gpg
 (setq epg-pinentry-mode 'loopback)
 
@@ -89,6 +99,8 @@
 
 ;; org org
 (setq +latex-viewers '(zathura))
+;; auto render latex in org mode
+(add-hook 'org-mode-hook 'org-fragtog-mode)
 
 ;; fish fish
 (setq vterm-shell 'fish)
@@ -163,18 +175,6 @@
         :desc "Search org-roam with consult-ripgrep"
         "n r F" #'org-roam-rg-search)
 
-;; Function for inserting node into Org Roam
-(defun org-roam-node-insert-immediate (arg &rest args)
-  (interactive "P")
-  (let ((args (cons arg args))
-        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
-                                                  '(:immediate-finish t)))))
-    (apply #'org-roam-node-insert args)))
-
-(map! :leader
-        :desc "Insert node immediately"
-        "n r I" #'org-roam-node-insert-immediate)
-
 (setq avy-all-windows 't)
 
 ;; Disables lsp-signature-auto-activate
@@ -208,9 +208,7 @@
   (blamer-face ((t :foreground "#7a88cf"
                     :background nil
                     :height 110
-                    :italic t)))
-  :config
-  (global-blamer-mode 1))
+                    :italic t))))
 
 ;; elfeed the rss reader
 (after! elfeed
@@ -265,3 +263,29 @@
        ((daily today remove-match)
         (800 1200 1600 2000)
         "......" "----------------")))
+
+;; Clojure stuffs
+(setq clojure-indent-style :always-align)
+
+(defun delete-file-and-buffer ()
+  "Kill the current buffer and deletes the file it is visiting."
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (if filename
+        (if (y-or-n-p (concat "Do you really want to delete file " filename " ?"))
+            (progn
+              (delete-file filename)
+              (message "Deleted file %s." filename)
+              (kill-buffer)))
+      (message "Not a file visiting buffer!"))))
+
+;; email stuffs
+;; Each path is relative to the path of the maildir you passed to mu
+(set-email-account! "minhtrannhat.com"
+  '((mu4e-sent-folder       . "/minhtrannhat@minhtrannhat.com/Sent")
+    (mu4e-drafts-folder     . "/minhtrannhat@minhtrannhat.com/Drafts")
+    (mu4e-trash-folder      . "/minhtrannhat@minhtrannhat.com/Trash")
+    (mu4e-refile-folder     . "/minhtrannhat@minhtrannhat.com/All Mail")
+    (smtpmail-smtp-user     . "minhtrannhat@minhtrannhat.com")
+    (mu4e-compose-signature . "---\nMinh Tran"))
+  t)

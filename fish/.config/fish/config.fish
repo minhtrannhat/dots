@@ -2,8 +2,6 @@ set fish_greeting
 fish_vi_key_bindings
 set fish_bind_mode insert
 
-theme_gruvbox dark hard
-
 alias rm 'rm -i'
 alias nnn 'nnn -e'
 alias icat 'kitty +kitten icat'
@@ -37,7 +35,7 @@ set -gx LC_ALL en_US.UTF-8
 
 set -gx _JAVA_AWT_WM_NONREPARENTING 1
 
-set -x PATH /usr/libexec /usr/local/bin /home/minhradz/.cargo/bin /home/minhradz/.local/bin /home/minhradz/go/bin /home/minhradz/.cabal/bin /home/minhradz/.local/share/gem/ruby/3.0.0/bin $PATH
+set -x PATH /home/minhradz/.ghcup/bin/ /usr/libexec /usr/local/bin /home/minhradz/.cargo/bin /home/minhradz/.local/bin /home/minhradz/go/bin /home/minhradz/.cabal/bin /home/minhradz/.local/share/gem/ruby/3.0.0/bin $PATH
 
 starship init fish | source
 

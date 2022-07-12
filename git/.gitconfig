@@ -1,7 +1,7 @@
 [pull]
 	rebase = false
 [user]
-	email = minhtrannhat@tutanota.com
+	email = minhtrannhat@minhtrannhat.com
 	name = minhtrannhat
 	signingkey = 894C6A5801E01CA9
 [commit]
@@ -9,9 +9,10 @@
 [init]
 	defaultBranch = master
 [gpg]
-	program = /usr/bin/gpg
+	program = /usr/bin/gpg2
 [pager]
     diff = delta
+    blame = delta
     log = delta
     reflog = delta
     show = delta
@@ -19,7 +20,7 @@
 [delta]
     side-by-side = true
     line-numbers = true
-    syntax-theme = gruvbox-dark
+    syntax-theme = Nord
     navigate = true
 
 [interactive]

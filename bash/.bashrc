@@ -42,3 +42,5 @@ export LC_ALL=en_US.UTF-8
 eval "$(direnv hook bash)"
 eval "$(starship init bash)"
 export PATH="/home/minhradz/.cargo/bin;/home/minhradz/.local/bin;/home/minhradz/go/bin;/home/minhradz/.cabal/bin:$PATH"
+
+[ -f "/home/minhradz/.ghcup/env" ] && source "/home/minhradz/.ghcup/env"
