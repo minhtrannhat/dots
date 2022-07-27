@@ -11,6 +11,7 @@ lvim.builtin.autopairs.active = true
 lvim.builtin.gitsigns.active = true
 lvim.builtin.notify.active = false
 lvim.builtin.dap.active = true
+lvim.builtin.treesitter.rainbow.enable = true
 
 lvim.builtin.nvimtree.side = "left"
 lvim.builtin.terminal.shell = "/bin/fish"
@@ -62,10 +63,10 @@ lvim.plugins = {
 	{ "shaunsingh/nord.nvim" },
 	{
 		"ray-x/lsp_signature.nvim",
+		event = "BufRead",
 		config = function()
 			require("lsp_signature").on_attach()
 		end,
-		event = "InsertEnter",
 	},
 	{ "machakann/vim-sandwich" },
 	{ "tpope/vim-fugitive" },
@@ -87,6 +88,16 @@ lvim.plugins = {
 		config = function()
 			require("hlargs").setup()
 		end,
+	},
+	{
+		"windwp/nvim-ts-autotag",
+		config = function()
+			require("nvim-ts-autotag").setup()
+		end,
+	},
+	{
+		"p00f/nvim-ts-rainbow",
+		event = "InsertEnter",
 	},
 	{
 		"aserowy/tmux.nvim",

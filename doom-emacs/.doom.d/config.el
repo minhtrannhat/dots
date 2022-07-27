@@ -175,6 +175,13 @@
         :desc "Search org-roam with consult-ripgrep"
         "n r F" #'org-roam-rg-search)
 
+(setq org-roam-node-display-template
+#("${doom-hierarchy:20} ${doom-type:12} ${doom-tags:42}" 20 35
+  (face font-lock-keyword-face)
+  36 51
+  (face org-tag))
+)
+
 (setq avy-all-windows 't)
 
 ;; Disables lsp-signature-auto-activate
@@ -287,5 +294,11 @@
     (mu4e-trash-folder      . "/minhtrannhat@minhtrannhat.com/Trash")
     (mu4e-refile-folder     . "/minhtrannhat@minhtrannhat.com/All Mail")
     (smtpmail-smtp-user     . "minhtrannhat@minhtrannhat.com")
-    (mu4e-compose-signature . "---\nMinh Tran"))
+    (mu4e-compose-signature . "Minh Tran"))
   t)
+
+(setq sendmail-program "/usr/bin/msmtp"
+      send-mail-function #'smtpmail-send-it
+      message-sendmail-f-is-evil t
+      message-sendmail-extra-arguments '("--read-envelope-from")
+      message-send-mail-function #'message-send-mail-with-sendmail)

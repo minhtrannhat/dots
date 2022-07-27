@@ -55,3 +55,4 @@
 (package! magit-delta)
 (package! blamer :recipe (:host github :repo "artawower/blamer.el"))
 (package! org-fragtog)
+(unpin! rustic)
