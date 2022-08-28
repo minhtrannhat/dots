@@ -34,8 +34,9 @@ set -gx MANPAGER "lvim +Man!"
 set -gx LC_ALL en_US.UTF-8
 
 set -gx _JAVA_AWT_WM_NONREPARENTING 1
+set --export BUN_INSTALL "$HOME/.bun"
 
-set -x PATH /home/minhradz/.ghcup/bin/ /usr/libexec /usr/local/bin /home/minhradz/.cargo/bin /home/minhradz/.local/bin /home/minhradz/go/bin /home/minhradz/.cabal/bin /home/minhradz/.local/share/gem/ruby/3.0.0/bin $PATH
+set -x PATH /home/minhradz/.ghcup/bin/ /usr/libexec /usr/local/bin /home/minhradz/.cargo/bin /home/minhradz/.local/bin /home/minhradz/go/bin /home/minhradz/.cabal/bin /home/minhradz/.local/share/gem/ruby/3.0.0/bin $BUN_INSTALL/bin $PATH
 
 starship init fish | source
 
