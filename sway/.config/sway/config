@@ -23,6 +23,11 @@ exec autotiling
 # window manager
 exec env RUST_BACKTRACE=1 swayrd > /tmp/swayrd.log 2>&1
 
+# clipman the clipboard manager
+exec wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman/clipman-primary.json"
+exec clipman restore
+exec wl-paste -t text --watch clipman store
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -82,9 +87,14 @@ for_window [title="Firefox — Sharing Indicator"] floating enable
 for_window [title="Firefox — Sharing Indicator"] nofocus
 for_window [app_id="mpv"] inhibit_idle visible; border none; max_render_time off
 for_window [app_id="soffice.bin"] inhibit_idle visible; border none; max_render_time off
-for_window [class="firefox"] inhibit_idle fullscreen; max_render_time off
-for_window [app_id="firefox"] inhibit_idle fullscreen; max_render_time off
+for_window [app_id="kitty"] inhibit_idle visible; max_render_time off
+for_window [class="chromium"] inhibit_idle fullscreen; max_render_time off
+for_window [app_id="chromium"] inhibit_idle fullscreen; max_render_time off
+for_window [class="brave"] inhibit_idle fullscreen; max_render_time off
+for_window [app_id="brave"] inhibit_idle fullscreen; max_render_time off
 for_window [app_id="jellyfinmediaplayer"] inhibit_idle fullscreen; max_render_time off
+for_window [app_id="zathura"] inhibit_idle visible; max_render_time off
+for_window [app_id="emacs"] inhibit_idle visible; max_render_time off
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
@@ -120,6 +130,9 @@ for_window [app_id="jellyfinmediaplayer"] inhibit_idle fullscreen; max_render_ti
 
     # Reload the configuration file
     bindsym $mod+Shift+c reload
+
+    # clipboard manager
+    bindsym $mod+p exec clipman pick -t wofi
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec exec wlogout -p layer-shell

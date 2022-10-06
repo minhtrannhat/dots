@@ -1,7 +1,7 @@
 [pull]
 	rebase = false
 [user]
-	email = minhtrannhat@tutanota.com
+	email = minhtrannhat@minhtrannhat.com
 	name = minhtrannhat
 	signingkey = 894C6A5801E01CA9
 [commit]
@@ -9,7 +9,7 @@
 [init]
 	defaultBranch = master
 [gpg]
-	program = /usr/bin/gpg
+	program = /usr/bin/gpg2
 [pager]
     diff = delta
     log = delta

@@ -56,3 +56,5 @@
 (package! org-roam-ui :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
 (package! magit-delta)
 (package! blamer :recipe (:host github :repo "artawower/blamer.el"))
+(package! org-auctex :recipe (:host github :repo "karthink/org-auctex"))
+(package! solaire-mode :disable t)

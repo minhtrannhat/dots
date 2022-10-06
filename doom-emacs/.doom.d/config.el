@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "minhtrannhat"
-      user-mail-address "minhtrannhat@tutanota.com")
+      user-mail-address "minhtrannhat@minhtrannhat.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -16,7 +16,7 @@
 ;; + `doom-variable-pitch-font'
 ;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
 ;;   presentations or streaming.
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18)
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 20)
       doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 26)
       doom-variable-pitch-font (font-spec :family "Overpass" :size 16)
       doom-unicode-font (font-spec :family "JuliaMono")
@@ -28,8 +28,8 @@
 (setq fancy-splash-image "/home/minhradz/.doom.d/marivector.png")
 
 (defun synchronize-theme ()
-(let* ((light-theme 'modus-operandi)
-        (dark-theme 'doom-palenight)
+(let* ((light-theme 'doom-nord-light)
+        (dark-theme 'doom-nord)
         (start-time-light-theme 6)
         (end-time-light-theme 16)
         (hour (string-to-number (substring (current-time-string) 11 13)))
@@ -38,8 +38,6 @@
         (when (not (equal doom-theme next-theme))
                 (setq doom-theme next-theme)
         (load-theme next-theme t))))
-
-(setq doom-nord-light-region-highlight 't)
 
 (run-with-timer 0 900 'synchronize-theme)
 
@@ -67,7 +65,6 @@
                                 "--completion-style=detailed"
                                 "--header-insertion=never"
                                 "--header-insertion-decorators=0"))
-(after! lsp-clangd (set-lsp-priority! 'clangd 2))
 
 ;; I mindlessly press ESC, so stop me from wreaking havoc
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -82,6 +79,8 @@
 ;;   (require 'tree-sitter-langs)
 ;;   (global-tree-sitter-mode)
 ;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(setq +tree-sitter-hl-enabled-modes 't)
 
 ;; gpg
 (setq epg-pinentry-mode 'loopback)
@@ -192,6 +191,7 @@
 
 ;; magit delta looks so good
 (add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1)))
+(add-hook 'magit-mode-hook (lambda () (magit-todos-mode)))
 
 ;; keybind to disable search highlighting (like :set noh)
 (map! :leader
@@ -214,4 +214,26 @@
   :config
   (global-blamer-mode 1))
 
-(add-hook 'after-make-frame-functions #'doom-modeline-set-selected-window)
+;; performance issue
+(setq lsp-idle-delay 0.500)
+
+(add-hook 'text-mode-hook 'pixel-scroll-mode)
+(add-hook 'text-mode-hook 'pixel-scroll-precision-mode)
+
+;; email stuffs
+;; Each path is relative to the path of the maildir you passed to mu
+(set-email-account! "minhtrannhat.com"
+  '((mu4e-sent-folder       . "/minhtrannhat@minhtrannhat.com/Sent")
+    (mu4e-drafts-folder     . "/minhtrannhat@minhtrannhat.com/Drafts")
+    (mu4e-trash-folder      . "/minhtrannhat@minhtrannhat.com/Trash")
+    (mu4e-refile-folder     . "/minhtrannhat@minhtrannhat.com/All Mail")
+    (smtpmail-smtp-user     . "minhtrannhat@minhtrannhat.com")
+    (mu4e-compose-signature . "Minh Tran"))
+  t)
+
+(after! mu4e
+  (setq sendmail-program (executable-find "msmtp")
+        send-mail-function #'smtpmail-send-it
+        message-sendmail-f-is-evil t
+        message-sendmail-extra-arguments '("--read-envelope-from")
+        message-send-mail-function #'message-send-mail-with-sendmail))

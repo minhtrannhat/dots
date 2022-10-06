@@ -3,7 +3,7 @@ lvim.format_on_save = true
 lvim.lint_on_save = true
 lvim.shell = "/bin/fish"
 lvim.leader = "space"
-lvim.builtin.dashboard.active = true
+lvim.builtin.alpha.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.autopairs.active = true
 lvim.builtin.gitsigns.active = true
@@ -71,6 +71,11 @@ lvim.plugins = {
 		end,
 	},
 	{ "ggandor/lightspeed.nvim", requires = { "tpope/vim-repeat" }, event = "InsertEnter" },
+	{
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = require("todo-comments").setup({}),
+	},
 }
 
 -- Changes to clangd
