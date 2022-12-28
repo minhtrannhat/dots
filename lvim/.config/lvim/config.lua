@@ -3,14 +3,15 @@ lvim.format_on_save = true
 lvim.lint_on_save = true
 lvim.shell = "/bin/fish"
 lvim.leader = "space"
+
 lvim.builtin.alpha.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.autopairs.active = true
-lvim.builtin.gitsigns.active = true
 lvim.builtin.dap.active = true
+lvim.builtin.gitsigns.active = true
+
 vim.opt.relativenumber = true
 lvim.builtin.nvimtree.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 1
 lvim.builtin.terminal.shell = "/bin/fish"
 
 vim.g.nord_contrast = true
@@ -70,16 +71,58 @@ lvim.plugins = {
 			require("spellsitter").setup()
 		end,
 	},
-	{ "ggandor/lightspeed.nvim", requires = { "tpope/vim-repeat" }, event = "InsertEnter" },
 	{
-		"folke/todo-comments.nvim",
-		requires = "nvim-lua/plenary.nvim",
-		config = require("todo-comments").setup({}),
+		"aserowy/tmux.nvim",
+		config = function()
+			require("tmux").setup({
+				copy_sync = {
+					enable = false,
+				},
+				navigation = {
+					enable_default_keybindings = true,
+				},
+				resize = {
+					enable_default_keybindings = true,
+				},
+			})
+		end,
+	},
+	{
+		"iamcco/markdown-preview.nvim",
+		run = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	},
+	"haya14busa/is.vim",
+	{
+		"max397574/better-escape.nvim",
+		config = function()
+			require("better_escape").setup()
+		end,
+	},
+	{
+		"phaazon/hop.nvim",
+		branch = "v2", -- optional but strongly recommended
+		config = function()
+			-- you can configure Hop the way you like here; see :h hop-config
+			require("hop").setup(
+				{ keys = "etovxqpdygfblzhckisuran" },
+				vim.api.nvim_set_keymap("n", "t", ":HopChar2<cr>", { silent = true }),
+				vim.api.nvim_set_keymap("n", "T", ":HopPattern<cr>", { silent = true })
+			)
+		end,
 	},
 }
 
+require("better_escape").setup({
+	mapping = { "jk", "kj" }, -- a table with mappings to usek
+	timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
+	clear_empty_lines = false, -- clear line after escaping if there is only whitespace
+	keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
+})
+
 -- Changes to clangd
-vim.list_extend(lvim.lsp.override, { "clangd" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
 
 -- some settings can only passed as commandline flags `clangd --help`
 local clangd_flags = {
@@ -111,6 +154,3 @@ local opts = {
 }
 
 require("lvim.lsp.manager").setup("clangd", opts)
-
--- vim sandwhich with vim surround keybindings
-vim.cmd("runtime macros/sandwich/keymap/surround.vim")
