@@ -220,6 +220,8 @@
 (add-hook 'text-mode-hook 'pixel-scroll-mode)
 (add-hook 'text-mode-hook 'pixel-scroll-precision-mode)
 
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
+
 ;; email stuffs
 ;; Each path is relative to the path of the maildir you passed to mu
 (set-email-account! "minhtrannhat.com"
