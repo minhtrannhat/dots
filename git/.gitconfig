@@ -1,9 +1,9 @@
 [pull]
 	rebase = false
 [user]
-	email = minhtrannhat@minhtrannhat.com
+	email = minh@minhtrannhat.com
 	name = minhtrannhat
-	signingkey = 894C6A5801E01CA9
+	signingkey = E13CFA85C53F8062
 [commit]
 	gpgsign = true
 [init]
