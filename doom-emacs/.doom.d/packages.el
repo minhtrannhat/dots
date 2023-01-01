@@ -55,4 +55,7 @@
 (package! magit-delta)
 (package! blamer :recipe (:host github :repo "artawower/blamer.el"))
 (package! org-fragtog)
+;(package! org-contacts :recipe  (:host nil :type git :repo "https://repo.or.cz/org-contacts.git"))
+(package! org-recur)
+(package! emidje)
 (unpin! rustic)

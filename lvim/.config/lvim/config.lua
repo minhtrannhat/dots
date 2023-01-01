@@ -4,12 +4,12 @@ lvim.lint_on_save = true
 lvim.shell = "/bin/fish"
 lvim.leader = "space"
 vim.opt.relativenumber = true
+vim.opt.wrap = true
 
 lvim.builtin.alpha.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.autopairs.active = true
 lvim.builtin.gitsigns.active = true
-lvim.builtin.notify.active = false
 lvim.builtin.dap.active = true
 lvim.builtin.treesitter.rainbow.enable = true
 
@@ -76,7 +76,6 @@ lvim.plugins = {
 			require("spellsitter").setup()
 		end,
 	},
-	{ "ggandor/lightspeed.nvim", requires = { "tpope/vim-repeat" }, event = "InsertEnter" },
 	{ "ellisonleao/glow.nvim" },
 	{ "andweeb/presence.nvim" },
 	{
@@ -115,7 +114,33 @@ lvim.plugins = {
 			})
 		end,
 	},
+	"haya14busa/is.vim",
+	{
+		"max397574/better-escape.nvim",
+		config = function()
+			require("better_escape").setup()
+		end,
+	},
+	{
+		"phaazon/hop.nvim",
+		branch = "v2", -- optional but strongly recommended
+		config = function()
+			-- you can configure Hop the way you like here; see :h hop-config
+			require("hop").setup(
+				{ keys = "etovxqpdygfblzhckisuran" },
+				vim.api.nvim_set_keymap("n", "t", ":HopChar2<cr>", { silent = true }),
+				vim.api.nvim_set_keymap("n", "T", ":HopPattern<cr>", { silent = true })
+			)
+		end,
+	},
 }
+
+require("better_escape").setup({
+	mapping = { "jk", "kj" }, -- a table with mappings to use
+	timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
+	clear_empty_lines = false, -- clear line after escaping if there is only whitespace
+	keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
+})
 
 -- The setup config table shows all available config options with their default values:
 require("presence"):setup({
@@ -174,6 +199,3 @@ local opts = {
 }
 
 require("lvim.lsp.manager").setup("clangd", opts)
-
--- vim sandwhich with vim surround keybindings
-vim.cmd("runtime macros/sandwich/keymap/surround.vim")

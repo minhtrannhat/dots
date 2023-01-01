@@ -2,14 +2,14 @@
 #pulseaudio, #clock, #tags, #language, #memory, #network, #sndio,
 #mode, #window, #workspaces, #temperature, #taskbar, #workspaces,
 #custom-treefetch-downloads, #custom-update-count {
-  box-shadow: 4px 4px 0 #2e2e2e;
+  box-shadow: 4px 4px 0 #292c34;
   margin-bottom: 4px;
   margin-right: 4px;
   margin-left: 3px;
   margin-right: 7px;
   padding-left: 10px;
   padding-right: 10px;
-  background: #464646;
+  background: #3b4252;
   border-radius: 0px;
 }
 
@@ -18,7 +18,7 @@
 }
 
 #workspaces button {
-  color: #b48ead;
+  color: #ebcb8b;
   margin: 0;
   padding: 1px 1px 0px 1px;
 }
@@ -57,17 +57,17 @@ window#waybar {
 }
 
 #mpd {
-  color: #464646;
+  color: #3b4252;
   margin-left: 5px;
 }
 
 #custom-mpd-song-scroll {
-  color: #bf6429;
+  color: #8d6486;
   margin-right: 50px;
 }
 
 #tags button {
-  color: #787878;
+  color: #65718c;
   font-family: "Source Han Sans JP Heavy";
   font-weight: 700;
   padding: 0 3px;
@@ -84,20 +84,20 @@ window#waybar {
 }
 
 #tags button:hover {
-  color: #464646;
-  background: #787878;
+  color: #3b4252;
+  background: #65718c;
   box-shadow: none;
   text-shadow: none;
   transition: 0;
 }
 
 #tags button.focused {
-  color: #464646;
-  background: #e78a4e;
+  color: #3b4252;
+  background: #b48ead;
 }
 
 #tags button.urgent {
-  color: #ea6962;
+  color: #bf616a;
 }
 
 @keyframes fadein {
@@ -109,7 +109,7 @@ window#waybar {
   }
 }
 tooltip {
-  background: #464646;
+  background: #3b4252;
   border-radius: 7px;
   font-family: "JetBrains Mono Nerd Font", monospace;
   font-weight: 500;
@@ -117,7 +117,7 @@ tooltip {
   padding: 10px;
   animation-name: fadein;
   animation-duration: 0.2s;
-  border: 2px solid #787878;
+  border: 2px solid #65718c;
   text-shadow: none;
   color: #b48ead;
 }
@@ -127,8 +127,8 @@ tooltip label {
 }
 
 #tray menu {
-  background: #464646;
+  background: #3b4252;
   color: #b48ead;
   border-radius: 5px;
-  border: 2px solid #787878;
+  border: 2px solid #65718c;
 }

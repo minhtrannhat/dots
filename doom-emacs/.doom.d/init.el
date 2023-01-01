@@ -10,6 +10,12 @@
 ;;
 ;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
 ;;      directory (for easy access to its source code).
+
+;; Doom no longer native compile ahead of time so we have to hack around this smh
+(setq native-comp-deferred-compilation nil)
+(after! (doom-packages straight)
+  (setq straight--native-comp-available t))
+
 (doom! :input
        ;;chinese
        ;;japanese
@@ -126,7 +132,7 @@
        ;;idris             ; a language you can depend on
        (json +lsp)              ; At least it ain't XML
        (java +lsp) ; the poster child for carpal tunnel syndrome
-       (javascript +lsp)        ; all(hope(abandon(ye(who(enter(here))))))
+       (javascript +lsp +tree-sitter)        ; all(hope(abandon(ye(who(enter(here))))))
        (julia +lsp)             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
        latex             ; writing papers in Emacs has never been so fun
@@ -151,7 +157,7 @@
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        (rust +lsp)              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        scala             ; java, but good
-       (scheme +guile +mit +racket)   ; a fully conniving family of lisps
+       ;;(scheme +guile +mit +racket)   ; a fully conniving family of lisps
        (sh +fish)                ; she sells {ba,z,fi}sh shells on the C xor
        ;;sml
        ;;solidity          ; do you need a blockchain? No.
@@ -161,7 +167,7 @@
        yaml              ; JSON, but readable
        zig               ; C, but simpler
        :email
-       (mu4e)
+       ;; (mu4e)
        ;;notmuch
        ;;(wanderlust +gmail)
        :app

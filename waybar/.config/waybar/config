@@ -50,7 +50,8 @@
         "states": {
           "warning": 70,
           "critical": 90
-        }
+        },
+        "on-click": ""
     },
     "memory": {
         "interval": 5,
@@ -59,6 +60,7 @@
             "warning": 70,
             "critical": 90
         },
+        "on-click": ""
     },
 
   "battery": {
@@ -74,7 +76,8 @@
 			"",
 			"",
 			""
-		]
+		],
+    "on-click": ""
 	},
 
     "tray": {
@@ -85,11 +88,13 @@
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "{:%I:%M %p}",
+        "on-click": ""
     },
 
     "clock#date": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "{:%B %d, %A}",
+        "on-click": ""
     },
 
     "pulseaudio": {

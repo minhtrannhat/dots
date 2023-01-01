@@ -27,6 +27,8 @@ set -gx QT_AUTO_SCREEN_SCALE_FACTOR 1
 set -Ux GTK_IM_MODULE ibus
 set -Ux QT_IM_MODULE ibus
 set -Ux XMODIFIERS @im=ibus
+set -Ux PYTHON_KEYRING_BACKEND keyring.backends.null.Keyring
+set -Ux SYSTEMD_TIMEDATED_NTP_SERVICES chronyd.service:systemd-timesyncd.service
 
 set -gx EDITOR lvim
 set -gx NVIM_LISTEN_ADDRESS /tmp/nvimsocket

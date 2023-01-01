@@ -7,7 +7,7 @@
  '(git-gutter:update-interval 0.02)
  '(smtpmail-smtp-server "mail.minhtrannhat.com")
  '(smtpmail-smtp-service 587)
- '(warning-suppress-types '((org-element-cache))))
+ '(warning-suppress-types '(((yasnippet zombie)) (defvaralias) (org-element-cache))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -55,6 +55,8 @@
 
 (setq display-line-numbers-type 'relative)
 
+(setq ispell-alternate-dictionary "/home/minhradz/.english.dict.txt")
+
 (add-hook 'spell-fu-mode-hook
   (lambda ()
     (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en"))
@@ -175,12 +177,13 @@
         :desc "Search org-roam with consult-ripgrep"
         "n r F" #'org-roam-rg-search)
 
-(setq org-roam-node-display-template
-#("${doom-hierarchy:20} ${doom-type:12} ${doom-tags:42}" 20 35
-  (face font-lock-keyword-face)
-  36 51
-  (face org-tag))
-)
+;; (setq org-roam-node-display-template
+;; #("${doom-hierarchy:20} ${doom-type:12} ${doom-tags:42}" 20 35
+;;   (face font-lock-keyword-face)
+;;   36 51
+;;   (face org-tag))
+;; )
+(set-file-template! "/roam/.+\\.org$" 'org-mode :ignore t)
 
 (setq avy-all-windows 't)
 
@@ -274,6 +277,9 @@
 ;; Clojure stuffs
 (setq clojure-indent-style :always-align)
 
+(eval-after-load 'cider
+  #'emidje-setup)
+
 (defun delete-file-and-buffer ()
   "Kill the current buffer and deletes the file it is visiting."
   (interactive)
@@ -286,19 +292,49 @@
               (kill-buffer)))
       (message "Not a file visiting buffer!"))))
 
-;; email stuffs
-;; Each path is relative to the path of the maildir you passed to mu
-(set-email-account! "minhtrannhat.com"
-  '((mu4e-sent-folder       . "/minhtrannhat@minhtrannhat.com/Sent")
-    (mu4e-drafts-folder     . "/minhtrannhat@minhtrannhat.com/Drafts")
-    (mu4e-trash-folder      . "/minhtrannhat@minhtrannhat.com/Trash")
-    (mu4e-refile-folder     . "/minhtrannhat@minhtrannhat.com/All Mail")
-    (smtpmail-smtp-user     . "minhtrannhat@minhtrannhat.com")
-    (mu4e-compose-signature . "Minh Tran"))
-  t)
+;; ;; email stuffs
+;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 
-(setq sendmail-program "/usr/bin/msmtp"
-      send-mail-function #'smtpmail-send-it
-      message-sendmail-f-is-evil t
-      message-sendmail-extra-arguments '("--read-envelope-from")
-      message-send-mail-function #'message-send-mail-with-sendmail)
+;; ;; Each path is relative to the path of the maildir you passed to mu
+;; (set-email-account! "minhtrannhat.com"
+;;   '((mu4e-sent-folder       . "/minhtrannhat@minhtrannhat.com/Sent")
+;;     (mu4e-drafts-folder     . "/minhtrannhat@minhtrannhat.com/Drafts")
+;;     (mu4e-trash-folder      . "/minhtrannhat@minhtrannhat.com/Trash")
+;;     (mu4e-refile-folder     . "/minhtrannhat@minhtrannhat.com/All Mail")
+;;     (smtpmail-smtp-user     . "minhtrannhat@minhtrannhat.com")
+;;     (mu4e-compose-signature . "Minh Tran"))
+;;   t)
+
+;; (setq sendmail-program "/usr/bin/msmtp"
+;;       send-mail-function #'smtpmail-send-it
+;;       message-sendmail-f-is-evil t
+;;       message-sendmail-extra-arguments '("--read-envelope-from")
+;;       message-send-mail-function #'message-send-mail-with-sendmail)
+
+(use-package org-recur
+  :hook ((org-mode . org-recur-mode)
+         (org-agenda-mode . org-recur-agenda-mode))
+  :demand t
+  :config
+  (define-key org-recur-mode-map (kbd "C-c d") 'org-recur-finish)
+
+  ;; Rebind the 'd' key in org-agenda (default: `org-agenda-day-view').
+  (define-key org-recur-agenda-mode-map (kbd "d") 'org-recur-finish)
+  (define-key org-recur-agenda-mode-map (kbd "C-c d") 'org-recur-finish)
+
+  (setq org-recur-finish-done t
+        org-recur-finish-archive t))
+
+;; Refresh org-agenda after rescheduling a task.
+(defun org-agenda-refresh ()
+  "Refresh all `org-agenda' buffers."
+  (dolist (buffer (buffer-list))
+    (with-current-buffer buffer
+      (when (derived-mode-p 'org-agenda-mode)
+        (org-agenda-maybe-redo)))))
+
+(defadvice org-schedule (after refresh-agenda activate)
+  "Refresh org-agenda."
+  (org-agenda-refresh))
+
+(setq org-read-date-prefer-future 'time)
