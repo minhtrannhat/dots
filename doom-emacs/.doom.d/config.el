@@ -28,18 +28,21 @@
 (add-hook 'prog-mode-hook #'pixel-scroll-mode)
 (add-hook 'text-mode-hook #'pixel-scroll-mode)
 
+(add-hook 'prog-mode-hook #'pixel-scroll-precision-mode)
+(add-hook 'text-mode-hook #'pixel-scroll-precision-mode)
+
 (setq fancy-splash-image "/home/minhradz/.doom.d/marivector.png")
 
 (defun synchronize-theme ()
-(let* ((light-theme 'doom-nord-light)
+ (let* ((light-theme 'doom-nord-light)
         (dark-theme 'doom-nord)
         (start-time-light-theme 6)
         (end-time-light-theme 16)
         (hour (string-to-number (substring (current-time-string) 11 13)))
         (next-theme (if (member hour (number-sequence start-time-light-theme end-time-light-theme))
-                light-theme dark-theme)))
-        (when (not (equal doom-theme next-theme))
-                (setq doom-theme next-theme)
+                     light-theme dark-theme)))
+       (when (not (equal doom-theme next-theme))
+             (setq doom-theme next-theme)
         (load-theme next-theme t))))
 
 (run-with-timer 0 900 'synchronize-theme)
@@ -79,19 +82,16 @@
 (custom-set-variables
  '(git-gutter:update-interval 0.02))
 
-;; ;; tree-sitter syntax highlighting
-;; (use-package! tree-sitter
-;;   :config
-;;   (require 'tree-sitter-langs)
-;;   (global-tree-sitter-mode)
-;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+;;
+;; tree-sitter syntax highlighting
+(require 'treesit)
+(treesit-available-p)
+(setq treesit-extra-load-path "/home/minhradz/Desktop/Packages/tree-sitter-module/dist/")
 
-(global-tree-sitter-mode)
-(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
-(require 'elcord)
-(elcord-mode)
-(setq elcord-use-major-mode-as-main-icon 't)
+;; (require 'elcord)
+;; (elcord-mode)
+;; (setq elcord-use-major-mode-as-main-icon 't)
 
 ;; gpg
 (setq epg-pinentry-mode 'loopback)
@@ -274,11 +274,22 @@
         (800 1200 1600 2000)
         "......" "----------------")))
 
-;; Clojure stuffs
+;; Lispys stuffs
 (setq clojure-indent-style :always-align)
+(add-hook 'lisp-mode-hook #'evil-cleverparens-mode)
+(add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
 
-(eval-after-load 'cider
-  #'emidje-setup)
+(autoload 'enable-paredit-mode "paredit"
+  "Turn on pseudo-structural editing of Lisp code."
+  t)
+(add-hook 'emacs-lisp-mode-hook       'enable-paredit-mode)
+(add-hook 'lisp-mode-hook             'enable-paredit-mode)
+(add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
+(add-hook 'clojure-mode-hook          'enable-paredit-mode)
+(add-hook 'scheme-mode-hook           'enable-paredit-mode)
+
+;; (eval-after-load 'cider
+;;   #'emidje-setup)
 
 (defun delete-file-and-buffer ()
   "Kill the current buffer and deletes the file it is visiting."
@@ -291,25 +302,6 @@
               (message "Deleted file %s." filename)
               (kill-buffer)))
       (message "Not a file visiting buffer!"))))
-
-;; ;; email stuffs
-;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
-
-;; ;; Each path is relative to the path of the maildir you passed to mu
-;; (set-email-account! "minhtrannhat.com"
-;;   '((mu4e-sent-folder       . "/minhtrannhat@minhtrannhat.com/Sent")
-;;     (mu4e-drafts-folder     . "/minhtrannhat@minhtrannhat.com/Drafts")
-;;     (mu4e-trash-folder      . "/minhtrannhat@minhtrannhat.com/Trash")
-;;     (mu4e-refile-folder     . "/minhtrannhat@minhtrannhat.com/All Mail")
-;;     (smtpmail-smtp-user     . "minhtrannhat@minhtrannhat.com")
-;;     (mu4e-compose-signature . "Minh Tran"))
-;;   t)
-
-;; (setq sendmail-program "/usr/bin/msmtp"
-;;       send-mail-function #'smtpmail-send-it
-;;       message-sendmail-f-is-evil t
-;;       message-sendmail-extra-arguments '("--read-envelope-from")
-;;       message-send-mail-function #'message-send-mail-with-sendmail)
 
 (use-package org-recur
   :hook ((org-mode . org-recur-mode)

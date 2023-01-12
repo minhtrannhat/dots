@@ -15,7 +15,7 @@ exec mako
 exec udiskie
 
 # night light and some gamma decrease 
-exec wlsunset -l 45.6 -L -73.5 -g 0.8
+exec wlsunset -l 45.6 -L -73.5 -g 0.7
 
 # bspwm throw back
 exec /usr/bin/autotiling
@@ -60,6 +60,12 @@ client.placeholder      #000000 #0c0c0c #eceff4 #000000   #0c0c0c
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 gaps inner 6
 gaps outer 3
+
+# Key repeat rate
+input type:keyboard {
+  repeat_delay 300
+  repeat_rate 30
+}
 
 ### Output configuration
 

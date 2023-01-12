@@ -1,0 +1,24 @@
+background-color=#282828
+progress-color=source #81a1c1
+text-color=#eceff4
+padding=15
+outer-margin=9
+default-timeout=5000
+margin=5
+
+border-size=2
+border-radius=5
+border-color=#a3be8c
+
+[urgency=low]
+border-color=#434c5e
+
+[urgency=normal]
+border-color=#a3be8c
+
+[urgency=high]
+border-color=#bf616a
+default-timeout=0
+
+layer=overlay
+on-button-middle=exec makoctl menu -n "$id" wofi -d -p 'Select action: '

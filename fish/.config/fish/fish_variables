@@ -3,8 +3,8 @@
 SETUVAR --export GTK_IM_MODULE:ibus
 SETUVAR --export PYTHON_KEYRING_BACKEND:keyring\x2ebackends\x2enull\x2eKeyring
 SETUVAR --export QT_IM_MODULE:ibus
-SETUVAR --export SSH_AGENT_PID:1262
-SETUVAR --export SSH_AUTH_SOCK:/tmp/ssh\x2dXXXXXX5aofTC/agent\x2e1261
+SETUVAR --export SSH_AGENT_PID:1219
+SETUVAR --export SSH_AUTH_SOCK:/tmp/ssh\x2dXXXXXXqVfRCj/agent\x2e1218
 SETUVAR --export SYSTEMD_TIMEDATED_NTP_SERVICES:chronyd\x2eservice\x3asystemd\x2dtimesyncd\x2eservice
 SETUVAR --export XMODIFIERS:\x40im\x3dibus
 SETUVAR __fish_initialized:3400

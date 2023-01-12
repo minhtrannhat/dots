@@ -24,11 +24,19 @@ vim.g.nord_disable_background = false
 vim.g.nord_italic = true
 vim.termguicolors = true
 lvim.colorscheme = "nord"
-vim.api.nvim_set_var("Hexokinase_highlighters", { "backgroundfull" })
 
 lvim.builtin.treesitter.ensure_installed = {}
 lvim.builtin.treesitter.ignore_install = { "" }
 lvim.builtin.treesitter.highlight.enabled = true
+
+local null_ls = require("null-ls")
+
+null_ls.setup({
+	sources = {
+		null_ls.builtins.formatting.ruff,
+		null_ls.builtins.diagnostics.ruff,
+	},
+})
 
 local formatters = require("lvim.lsp.null-ls.formatters")
 local linters = require("lvim.lsp.null-ls.linters")
@@ -55,7 +63,7 @@ formatters.setup({
 })
 
 linters.setup({
-	{ exe = "flake8" },
+	{ exe = "ruff", filetype = { "python" } },
 })
 
 -- Additional Plugins
@@ -78,10 +86,6 @@ lvim.plugins = {
 	},
 	{ "ellisonleao/glow.nvim" },
 	{ "andweeb/presence.nvim" },
-	{
-		"RRethy/vim-hexokinase",
-		run = "cd ~/.local/share/lunarvim/site/pack/packer/start/vim-hexokinase && make hexokinase",
-	},
 	{
 		"m-demare/hlargs.nvim",
 		config = function()
@@ -133,7 +137,10 @@ lvim.plugins = {
 			)
 		end,
 	},
+	"norcalli/nvim-colorizer.lua",
 }
+
+require("colorizer").setup()
 
 require("better_escape").setup({
 	mapping = { "jk", "kj" }, -- a table with mappings to use
