@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "minhtrannhat"
-      user-mail-address "minhtrannhat@minhtrannhat.com")
+      user-mail-address "minh@minhtrannhat.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -16,11 +16,7 @@
 ;; + `doom-variable-pitch-font'
 ;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
 ;;   presentations or streaming.
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18)
-      doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 26)
-      doom-variable-pitch-font (font-spec :family "Overpass" :size 16)
-      doom-unicode-font (font-spec :family "JuliaMono")
-      doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18))
 
 (setq doom-emoji-fallback-font-families nil)
 (setq doom-symbol-fallback-font-families nil)
@@ -75,6 +71,8 @@
                                 "--header-insertion-decorators=0"))
 (after! lsp-clangd (set-lsp-priority! 'clangd 2))
 
+(setq lsp-auto-guess-root nil)
+
 ;; I mindlessly press ESC, so stop me from wreaking havoc
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
@@ -84,14 +82,26 @@
 
 ;;
 ;; tree-sitter syntax highlighting
-(require 'treesit)
-(treesit-available-p)
-(setq treesit-extra-load-path "/home/minhradz/Desktop/Packages/tree-sitter-module/dist/")
+;; (require 'treesit)
+;; (treesit-available-p)
+;; (setq major-mode-remap-alist
+;;  '((yaml-mode . yaml-ts-mode)
+;;    (bash-mode . bash-ts-mode)
+;;    (js2-mode . js-ts-mode)
+;;    (typescript-mode . typescript-ts-mode)
+;;    (json-mode . json-ts-mode)
+;;    (css-mode . css-ts-mode)
+;;    (python-mode . python-ts-mode)))
 
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
-;; (require 'elcord)
-;; (elcord-mode)
-;; (setq elcord-use-major-mode-as-main-icon 't)
+(require 'elcord)
+(elcord-mode)
+(setq elcord-use-major-mode-as-main-icon 't)
 
 ;; gpg
 (setq epg-pinentry-mode 'loopback)
@@ -104,8 +114,8 @@
 ;; auto render latex in org mode
 (add-hook 'org-mode-hook 'org-fragtog-mode)
 
-;; fish fish
-(setq vterm-shell 'fish)
+;; zsh zsh
+(setq vterm-shell 'zsh)
 
 (defun doom-modeline-conditional-buffer-encoding ()
   "We expect the encoding to be LF UTF-8, so only show the modeline when this is not the case"
@@ -193,7 +203,7 @@
   (setq lsp-signature-auto-activate nil))
 
 ;; this never worked lol
-(lsp-treemacs-sync-mode 1)
+(setq lsp-treemacs-sync-mode 1)
 
 ;; bitmap very funni
 (setq highlight-indent-guides-method 'bitmap)

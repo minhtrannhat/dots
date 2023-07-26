@@ -71,14 +71,13 @@ input type:keyboard {
 
 output * bg /home/minhradz/Downloads/wall.png fill
 
-output LVDS-1 pos 0 0 res 1366x768
-output DP-1 res 1920x1080 position 1366,0
+output HDMI-A-1 res 1920x1080 position 0,0 adaptive_sync on
 
-### Idle configuration
+## Idle configuration
 exec swayidle -w \
-        timeout 300 'swaylock -f -c 000000' \
-        timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-        before-sleep 'swaylock -f -c 000000'
+        timeout 1800 'swaylock --ignore-empty-password --show-failed-attempts -f -c 000000' \
+        timeout 1800 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+        before-sleep 'swaylock --ignore-empty-password --show-failed-attempts -f -c 000000'
 
 for_window [title="Firefox — Sharing Indicator"] floating enable
 for_window [title="Firefox — Sharing Indicator"] nofocus
@@ -124,12 +123,12 @@ for_window [app_id="emacs"] inhibit_idle visible; max_render_time off
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec exec wlogout
+    bindsym $mod+Shift+e exec wlogout
 
     # clipboard manager
     bindsym $mod+p exec clipman pick -t wofi
 
-    bindsym $mod+t exec librewolf
+    bindsym $mod+t exec firefox
 #
 # Moving around:
 #
@@ -155,6 +154,9 @@ for_window [app_id="emacs"] inhibit_idle visible; max_render_time off
 #
 # Workspaces:
 #
+    # Switch to last workspace
+    bindsym $mod+Tab workspace back_and_forth
+
     # Switch to workspace
     bindsym $mod+1 workspace number 1
     bindsym $mod+2 workspace number 2
@@ -262,8 +264,6 @@ bindsym $mod+e exec emacsclient -nc
 bindsym $mod+Right workspace next
 bindsym $mod+Left workspace prev
 
-bindsym $mod+Tab exec swayr next-window current-workspace
-
 #
 # Status Bar:
 #
@@ -274,8 +274,8 @@ bar {
 
 include /etc/sway/config.d/*
 
-bindsym XF86AudioRaiseVolume exec pulsemixer --change-volume +2 && pulsemixer --get-volume > $SWAYSOCK.wob
-bindsym XF86AudioLowerVolume exec pulsemixer --change-volume -2 && pulsemixer --get-volume > $SWAYSOCK.wob
+bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume 0 +5% > $SWAYSOCK.wob
+bindsym XF86AudioLowerVolume exec pactl -- set-sink-volume 0 -5% > $SWAYSOCK.wob
 bindsym XF86AudioMute exec pulsemixer --toggle-mute && ( pulsemixer --get-mute && echo 0 > $SWAYSOCK.wob ) || pamixer --get-volume > $SWAYSOCK.wob
 bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86MonBrightnessDown exec light -U 10

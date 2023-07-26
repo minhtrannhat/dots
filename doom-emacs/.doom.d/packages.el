@@ -56,4 +56,6 @@
 (package! org-fragtog)
 (package! org-recur)
 (package! evil-cleverparens)
+(package! elcord)
 (unpin! rustic)
+(package! org :pin "5890ac")

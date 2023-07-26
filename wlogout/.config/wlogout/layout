@@ -1,6 +1,6 @@
 {
     "label" : "lock",
-    "action" : "swaylock -i ~/Downloads/william-moreland-W61Rp5RouCA-unsplash.png .s fill",
+    "action" : "swaylock --ignore-empty-password --show-failed-attempts -f -c 000000",
     "text" : "Lock",
     "keybind" : "l"
 }

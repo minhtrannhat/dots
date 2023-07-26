@@ -1,7 +1,7 @@
 -- general
 lvim.format_on_save = true
 lvim.lint_on_save = true
-lvim.shell = "/bin/fish"
+lvim.shell = "/bin/zsh"
 lvim.leader = "space"
 vim.opt.relativenumber = true
 vim.opt.wrap = true
@@ -12,9 +12,10 @@ lvim.builtin.autopairs.active = true
 lvim.builtin.gitsigns.active = true
 lvim.builtin.dap.active = true
 lvim.builtin.treesitter.rainbow.enable = true
+lvim.builtin.cmp.cmdline.enable = true
 
 lvim.builtin.nvimtree.side = "left"
-lvim.builtin.terminal.shell = "/bin/fish"
+lvim.builtin.terminal.shell = "/bin/zsh"
 
 vim.termguicolors = true
 vim.background = "dark"
@@ -85,7 +86,7 @@ lvim.plugins = {
 		end,
 	},
 	{ "ellisonleao/glow.nvim" },
-	{ "andweeb/presence.nvim" },
+	{ "TakenMC/presence.nvim", branch = "other" },
 	{
 		"m-demare/hlargs.nvim",
 		config = function()
@@ -172,37 +173,3 @@ require("presence"):setup({
 	workspace_text = "Working on %s", -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
 	line_number_text = "Line %s out of %s", -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
 })
-
--- Changes to clangd
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
-
--- some settings can only passed as commandline flags `clangd --help`
-local clangd_flags = {
-	"--all-scopes-completion",
-	"--suggest-missing-includes",
-	"--background-index",
-	"--pch-storage=disk",
-	"--cross-file-rename",
-	"--log=info",
-	"--completion-style=detailed",
-	"--enable-config", -- clangd 11+ supports reading from .clangd configuration file
-	"--clang-tidy",
-	"--offset-encoding=utf-16",
-	"--clang-tidy-checks=-*,llvm-*,clang-analyzer-*,modernize-*,-modernize-use-trailing-return-type",
-	"--fallback-style=Google",
-}
-
-local clangd_bin = "clangd"
-
-local custom_on_attach = function(client, bufnr)
-	require("lvim.lsp").common_on_attach(client, bufnr)
-	local opts = { noremap = true, silent = true }
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>lh", "<Cmd>ClangdSwitchSourceHeader<CR>", opts)
-end
-
-local opts = {
-	cmd = { clangd_bin, unpack(clangd_flags) },
-	on_attach = custom_on_attach,
-}
-
-require("lvim.lsp.manager").setup("clangd", opts)
