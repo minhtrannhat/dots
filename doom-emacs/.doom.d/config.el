@@ -204,6 +204,7 @@
 
 ;; this never worked lol
 (setq lsp-treemacs-sync-mode 1)
+(setq treemacs-project-follow-mode 1)
 
 ;; bitmap very funni
 (setq highlight-indent-guides-method 'bitmap)
@@ -252,6 +253,7 @@
       :n "S" #'elfeed-search-set-filter
       :n "b" #'elfeed-search-browse-url
       :n "y" #'elfeed-search-yank)
+
 (map! :map elfeed-show-mode-map
       :after elfeed-show
       [remap kill-this-buffer] "q"
@@ -340,3 +342,7 @@
   (org-agenda-refresh))
 
 (setq org-read-date-prefer-future 'time)
+
+(map! :leader
+        :desc "Start/Stop pomodoro"
+        "m c p" #'org-pomodoro)

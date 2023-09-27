@@ -6,7 +6,7 @@
 #
 
 # dbus stuffs that idc
-exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
+# exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
 
 # notification 
 exec mako
@@ -71,7 +71,13 @@ input type:keyboard {
 
 output * bg /home/minhradz/Downloads/wall.png fill
 
-output HDMI-A-1 res 1920x1080 position 0,0 adaptive_sync on
+output HDMI-A-1 res 1920x1080 position 0,0
+
+output * adaptive_sync on
+output * subpixel none
+output * render_bit_depth 10
+output * scale 1
+output * max_render_time 17
 
 ## Idle configuration
 exec swayidle -w \
@@ -181,6 +187,17 @@ for_window [app_id="emacs"] inhibit_idle visible; max_render_time off
     bindsym $mod+Control+9 workspace 19
     bindsym $mod+Control+0 workspace 20
 
+    bindsym $mod+Alt+1 workspace 21
+    bindsym $mod+Alt+2 workspace 22
+    bindsym $mod+Alt+3 workspace 23
+    bindsym $mod+Alt+4 workspace 24
+    bindsym $mod+Alt+5 workspace 25
+    bindsym $mod+Alt+6 workspace 26
+    bindsym $mod+Alt+7 workspace 27
+    bindsym $mod+Alt+8 workspace 28
+    bindsym $mod+Alt+9 workspace 29
+    bindsym $mod+Alt+0 workspace 30
+
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -192,6 +209,7 @@ for_window [app_id="emacs"] inhibit_idle visible; max_render_time off
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
     bindsym $mod+Shift+0 move container to workspace number 10
+
     bindsym $mod+Control+Shift+1 move container to workspace 11
     bindsym $mod+Control+Shift+2 move container to workspace 12
     bindsym $mod+Control+Shift+3 move container to workspace 13
@@ -202,6 +220,18 @@ for_window [app_id="emacs"] inhibit_idle visible; max_render_time off
     bindsym $mod+Control+Shift+8 move container to workspace 18
     bindsym $mod+Control+Shift+9 move container to workspace 19
     bindsym $mod+Control+Shift+0 move container to workspace 20
+
+    bindsym $mod+Alt+Shift+1 move container to workspace 21
+    bindsym $mod+Alt+Shift+2 move container to workspace 22
+    bindsym $mod+Alt+Shift+3 move container to workspace 23
+    bindsym $mod+Alt+Shift+4 move container to workspace 24
+    bindsym $mod+Alt+Shift+5 move container to workspace 25
+    bindsym $mod+Alt+Shift+6 move container to workspace 26
+    bindsym $mod+Alt+Shift+7 move container to workspace 27
+    bindsym $mod+Alt+Shift+8 move container to workspace 28
+    bindsym $mod+Alt+Shift+9 move container to workspace 29
+    bindsym $mod+Alt+Shift+0 move container to workspace 30
+
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #

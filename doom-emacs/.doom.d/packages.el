@@ -48,14 +48,25 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+
+;; gitty nitty
+(package! magit-delta)
+(package! blamer :recipe (:host github :repo "artawower/blamer.el"))
+
+;; evil parens
+(package! evil-cleverparens)
+
+;; discordo
+(package! elcord)
+
+;; rusty
+(unpin! rustic)
+
+;; orgy
+;; (package! org :pin "ca873f7")
+(package! org-pomodoro)
+(package! org-fragtog)
+(package! org-recur)
 (unpin! org-roam)
 (package! websocket)
 (package! org-roam-ui :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
-(package! magit-delta)
-(package! blamer :recipe (:host github :repo "artawower/blamer.el"))
-(package! org-fragtog)
-(package! org-recur)
-(package! evil-cleverparens)
-(package! elcord)
-(unpin! rustic)
-(package! org :pin "5890ac")
