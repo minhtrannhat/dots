@@ -173,3 +173,9 @@ require("presence"):setup({
 	workspace_text = "Working on %s", -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
 	line_number_text = "Line %s out of %s", -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
 })
+
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
+local capabilities = require("lvim.lsp").common_capabilities()
+capabilities.offsetEncoding = { "utf-16" }
+local opts = { capabilities = capabilities }
+require("lvim.lsp.manager").setup("clangd", opts)

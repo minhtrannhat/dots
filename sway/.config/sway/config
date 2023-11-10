@@ -135,6 +135,10 @@ for_window [app_id="emacs"] inhibit_idle visible; max_render_time off
     bindsym $mod+p exec clipman pick -t wofi
 
     bindsym $mod+t exec firefox
+
+    bindsym $mod+y exec youtube-watch
+
+    bindsym $mod+o exec "grim -g "$(slurp)" - | swappy -f -"
 #
 # Moving around:
 #

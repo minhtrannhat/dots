@@ -30,21 +30,21 @@
 (setq fancy-splash-image "/home/minhradz/.doom.d/marivector.png")
 
 (defun synchronize-theme ()
- (let* ((light-theme 'doom-nord-light)
-        (dark-theme 'doom-nord)
-        (start-time-light-theme 6)
-        (end-time-light-theme 16)
-        (hour (string-to-number (substring (current-time-string) 11 13)))
-        (next-theme (if (member hour (number-sequence start-time-light-theme end-time-light-theme))
-                     light-theme dark-theme)))
-       (when (not (equal doom-theme next-theme))
-             (setq doom-theme next-theme)
-        (load-theme next-theme t))))
+  (let* ((light-theme 'doom-nord-light)
+         (dark-theme 'doom-nord)
+         (start-time-light-theme 6)
+         (end-time-light-theme 16)
+         (hour (string-to-number (substring (current-time-string) 11 13)))
+         (next-theme (if (member hour (number-sequence start-time-light-theme end-time-light-theme))
+                         light-theme dark-theme)))
+    (when (not (equal doom-theme next-theme))
+      (setq doom-theme next-theme)
+      (load-theme next-theme t))))
 
 (run-with-timer 0 900 'synchronize-theme)
 
 (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+      doom-themes-enable-italic t) ; if nil, italics is universally disabled
 
 (with-eval-after-load 'doom-themes
   (doom-themes-treemacs-config))
@@ -57,10 +57,10 @@
 (setq ispell-alternate-dictionary "/home/minhradz/.english.dict.txt")
 
 (add-hook 'spell-fu-mode-hook
-  (lambda ()
-    (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en"))
-    (spell-fu-dictionary-add
-      (spell-fu-get-personal-dictionary "en-personal" "/home/minhradz/.aspell.en.pws"))))
+          (lambda ()
+            (spell-fu-dictionary-add (spell-fu-get-ispell-dictionary "en"))
+            (spell-fu-dictionary-add
+             (spell-fu-get-personal-dictionary "en-personal" "/home/minhradz/.aspell.en.pws"))))
 
 ;; Clangd lsp for C/C++ dev
 (setq lsp-clients-clangd-args '("-j=3"
@@ -155,19 +155,19 @@
 (setq doom-modeline-minor-modes nil)
 
 (use-package! websocket
-    :after org-roam)
+  :after org-roam)
 
 (use-package! org-roam-ui
-    :after org-roam ;; or :after org
-;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
-;;         a hookable mode anymore, you're advised to pick something yourself
-;;         if you don't care about startup time, use
-;;  :hook (after-init . org-roam-ui-mode)
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
+  :after org-roam ;; or :after org
+  ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+  ;;         a hookable mode anymore, you're advised to pick something yourself
+  ;;         if you don't care about startup time, use
+  ;;  :hook (after-init . org-roam-ui-mode)
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
 
 (setq org-roam-dailies-directory "daily/")
 
@@ -184,8 +184,8 @@
     (consult-ripgrep org-roam-directory)))
 
 (map! :leader
-        :desc "Search org-roam with consult-ripgrep"
-        "n r F" #'org-roam-rg-search)
+      :desc "Search org-roam with consult-ripgrep"
+      "n r F" #'org-roam-rg-search)
 
 ;; (setq org-roam-node-display-template
 ;; #("${doom-hierarchy:20} ${doom-type:12} ${doom-tags:42}" 20 35
@@ -205,6 +205,7 @@
 ;; this never worked lol
 (setq lsp-treemacs-sync-mode 1)
 (setq treemacs-project-follow-mode 1)
+(treemacs-add-and-display-current-project-exclusively)
 
 ;; bitmap very funni
 (setq highlight-indent-guides-method 'bitmap)
@@ -227,9 +228,9 @@
   (blamer-min-offset 40)
   :custom-face
   (blamer-face ((t :foreground "#7a88cf"
-                    :background nil
-                    :height 110
-                    :italic t))))
+                   :background nil
+                   :height 110
+                   :italic t))))
 
 ;; elfeed the rss reader
 (after! elfeed
@@ -344,5 +345,5 @@
 (setq org-read-date-prefer-future 'time)
 
 (map! :leader
-        :desc "Start/Stop pomodoro"
-        "m c p" #'org-pomodoro)
+      :desc "Start/Stop pomodoro"
+      "m c p" #'org-pomodoro)

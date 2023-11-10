@@ -96,12 +96,14 @@
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "{:%I:%M %p}",
+        "timezone": "America/Toronto",
         "on-click": ""
     },
 
     "clock#date": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "{:%B %d, %A}",
+        "timezone": "America/Toronto",
         "on-click": ""
     },
 
