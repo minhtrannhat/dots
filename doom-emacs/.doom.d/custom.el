@@ -5,6 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(elcord-display-buffer-details t)
  '(git-gutter:update-interval 0.02)
+ '(magit-todos-insert-after '(bottom) nil nil "Changed by setter of obsolete option `magit-todos-insert-at'")
  '(smtpmail-smtp-server "mail.minhtrannhat.com")
  '(smtpmail-smtp-service 587)
  '(warning-suppress-types '(((yasnippet zombie)) (defvaralias) (org-element-cache))))
@@ -15,3 +16,4 @@
  ;; If there is more than one, they won't work right.
  '(blamer-face ((t :foreground "#7a88cf" :background nil :height 110 :italic t)))
  '(ts-fold-replacement-face ((t (:foreground nil :box nil :inherit font-lock-comment-face :weight light)))))
+(put 'customize-save-customized 'disabled nil)

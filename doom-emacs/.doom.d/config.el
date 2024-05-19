@@ -46,10 +46,6 @@
 (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
 
-(with-eval-after-load 'doom-themes
-  (doom-themes-treemacs-config))
-(setq doom-themes-treemacs-theme "doom-colors")
-
 (setq org-directory "~/org/")
 
 (setq display-line-numbers-type 'relative)
@@ -73,6 +69,8 @@
 
 (setq lsp-auto-guess-root nil)
 
+(setq projectile-enable-caching nil)
+
 ;; I mindlessly press ESC, so stop me from wreaking havoc
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
@@ -80,28 +78,15 @@
 (custom-set-variables
  '(git-gutter:update-interval 0.02))
 
-;;
-;; tree-sitter syntax highlighting
-;; (require 'treesit)
-;; (treesit-available-p)
-;; (setq major-mode-remap-alist
-;;  '((yaml-mode . yaml-ts-mode)
-;;    (bash-mode . bash-ts-mode)
-;;    (js2-mode . js-ts-mode)
-;;    (typescript-mode . typescript-ts-mode)
-;;    (json-mode . json-ts-mode)
-;;    (css-mode . css-ts-mode)
-;;    (python-mode . python-ts-mode)))
+;; (use-package rust-mode
+;;   :init
+;;   (setq rust-mode-treesitter-derive t))
 
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+;; (use-package treesit-auto
+;;   :config
+;;   (global-treesit-auto-mode))
 
-(require 'elcord)
-(elcord-mode)
-(setq elcord-use-major-mode-as-main-icon 't)
+(setq elcord-use-major-mode-as-main-icon t)
 
 ;; gpg
 (setq epg-pinentry-mode 'loopback)
@@ -205,13 +190,12 @@
 ;; this never worked lol
 (setq lsp-treemacs-sync-mode 1)
 (setq treemacs-project-follow-mode 1)
-(treemacs-add-and-display-current-project-exclusively)
 
 ;; bitmap very funni
 (setq highlight-indent-guides-method 'bitmap)
 
 ;; magit delta looks so good
-(add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1)))
+;; (add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1)))
 
 ;; keybind to disable search highlighting (like :set noh)
 (map! :leader
@@ -232,61 +216,6 @@
                    :height 110
                    :italic t))))
 
-;; elfeed the rss reader
-(after! elfeed
-  (setq elfeed-search-filter "@1-month-ago"))
-(add-hook! 'elfeed-search-mode-hook #'elfeed-update)
-
-(map! :map elfeed-search-mode-map
-      :after elfeed-search
-      [remap kill-this-buffer] "q"
-      [remap kill-buffer] "q"
-      :n doom-leader-key nil
-      :n "q" #'+rss/quit
-      :n "e" #'elfeed-update
-      :n "r" #'elfeed-search-untag-all-unread
-      :n "u" #'elfeed-search-tag-all-unread
-      :n "s" #'elfeed-search-live-filter
-      :n "l" #'elfeed-search-show-entry
-      :n "p" #'elfeed-show-pdf
-      :n "+" #'elfeed-search-tag-all
-      :n "-" #'elfeed-search-untag-all
-      :n "S" #'elfeed-search-set-filter
-      :n "b" #'elfeed-search-browse-url
-      :n "y" #'elfeed-search-yank)
-
-(map! :map elfeed-show-mode-map
-      :after elfeed-show
-      [remap kill-this-buffer] "q"
-      [remap kill-buffer] "q"
-      :n doom-leader-key nil
-      :nm "h" #'+rss/delete-pane
-      :nm "o" #'elfeed-goodies/show-ace-link
-      :nm "RET" #'org-ref-elfeed-add
-      :nm "n" #'elfeed-show-next
-      :nm "N" #'elfeed-show-prev
-      :nm "p" #'elfeed-show-pdf
-      :nm "+" #'elfeed-show-tag
-      :nm "-" #'elfeed-show-untag
-      :nm "s" #'elfeed-show-new-live-search
-      :nm "y" #'elfeed-show-yank)
-
-
-(after! elfeed-search
-  (set-evil-initial-state! 'elfeed-search-mode 'normal))
-(after! elfeed-show-mode
-  (set-evil-initial-state! 'elfeed-show-mode   'normal))
-
-(after! evil-snipe
-  (push 'elfeed-show-mode   evil-snipe-disabled-modes)
-  (push 'elfeed-search-mode evil-snipe-disabled-modes))
-
-(setq org-agenda-time-grid
-      (quote
-       ((daily today remove-match)
-        (800 1200 1600 2000)
-        "......" "----------------")))
-
 ;; Lispys stuffs
 (setq clojure-indent-style :always-align)
 (add-hook 'lisp-mode-hook #'evil-cleverparens-mode)
@@ -301,9 +230,6 @@
 (add-hook 'clojure-mode-hook          'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           'enable-paredit-mode)
 
-;; (eval-after-load 'cider
-;;   #'emidje-setup)
-
 (defun delete-file-and-buffer ()
   "Kill the current buffer and deletes the file it is visiting."
   (interactive)
@@ -315,35 +241,3 @@
               (message "Deleted file %s." filename)
               (kill-buffer)))
       (message "Not a file visiting buffer!"))))
-
-(use-package org-recur
-  :hook ((org-mode . org-recur-mode)
-         (org-agenda-mode . org-recur-agenda-mode))
-  :demand t
-  :config
-  (define-key org-recur-mode-map (kbd "C-c d") 'org-recur-finish)
-
-  ;; Rebind the 'd' key in org-agenda (default: `org-agenda-day-view').
-  (define-key org-recur-agenda-mode-map (kbd "d") 'org-recur-finish)
-  (define-key org-recur-agenda-mode-map (kbd "C-c d") 'org-recur-finish)
-
-  (setq org-recur-finish-done t
-        org-recur-finish-archive t))
-
-;; Refresh org-agenda after rescheduling a task.
-(defun org-agenda-refresh ()
-  "Refresh all `org-agenda' buffers."
-  (dolist (buffer (buffer-list))
-    (with-current-buffer buffer
-      (when (derived-mode-p 'org-agenda-mode)
-        (org-agenda-maybe-redo)))))
-
-(defadvice org-schedule (after refresh-agenda activate)
-  "Refresh org-agenda."
-  (org-agenda-refresh))
-
-(setq org-read-date-prefer-future 'time)
-
-(map! :leader
-      :desc "Start/Stop pomodoro"
-      "m c p" #'org-pomodoro)

@@ -11,24 +11,27 @@ lvim.builtin.terminal.active = true
 lvim.builtin.autopairs.active = true
 lvim.builtin.gitsigns.active = true
 lvim.builtin.dap.active = true
-lvim.builtin.treesitter.rainbow.enable = true
+lvim.reload_config_on_save = true
 lvim.builtin.cmp.cmdline.enable = true
-
+lvim.builtin.breadcrumbs = { active = false }
 lvim.builtin.nvimtree.side = "left"
 lvim.builtin.terminal.shell = "/bin/zsh"
+lvim.lsp.installer.setup.automatic_installation = false
+vim.diagnostic.config({ virtual_text = false })
 
 vim.termguicolors = true
 vim.background = "dark"
-vim.g.nord_contrast = true
-vim.g.nord_borders = true
-vim.g.nord_disable_background = false
-vim.g.nord_italic = true
-vim.termguicolors = true
-lvim.colorscheme = "nord"
+
+lvim.keys.normal_mode["gt"] = ":BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["gT"] = ":BufferLineCyclePrev<CR>"
 
 lvim.builtin.treesitter.ensure_installed = {}
 lvim.builtin.treesitter.ignore_install = { "" }
 lvim.builtin.treesitter.highlight.enabled = true
+
+require("mason-lspconfig").setup_handlers({
+	["rust_analyzer"] = function() end,
+})
 
 local null_ls = require("null-ls")
 
@@ -52,10 +55,6 @@ formatters.setup({
 		exe = "clang_format",
 		filetypes = { "c", "cpp" },
 	},
-	{
-		exe = "rustfmt",
-		filetype = { "rust" },
-	},
 	{ exe = "prettier" },
 	{ exe = "gofmt", filetypes = { "go" } },
 	{ exe = "eslint_d" },
@@ -69,7 +68,26 @@ linters.setup({
 
 -- Additional Plugins
 lvim.plugins = {
-	{ "shaunsingh/nord.nvim" },
+	-- { "shaunsingh/nord.nvim" },
+	{
+		"gbprod/nord.nvim",
+	},
+	{
+		"folke/trouble.nvim",
+		cmd = "TroubleToggle",
+	},
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^4",
+		ft = { "rust" },
+		config = function()
+			vim.g.rustaceanvim = {
+				server = {
+					on_attach = require("lvim.lsp").common_on_attach,
+				},
+			}
+		end,
+	},
 	{
 		"ray-x/lsp_signature.nvim",
 		event = "BufRead",
@@ -86,7 +104,7 @@ lvim.plugins = {
 		end,
 	},
 	{ "ellisonleao/glow.nvim" },
-	{ "TakenMC/presence.nvim", branch = "other" },
+	{ "IogaMaster/neocord" },
 	{
 		"m-demare/hlargs.nvim",
 		config = function()
@@ -100,7 +118,7 @@ lvim.plugins = {
 		end,
 	},
 	{
-		"p00f/nvim-ts-rainbow",
+		"HiPhish/rainbow-delimiters.nvim",
 		event = "InsertEnter",
 	},
 	{
@@ -150,19 +168,55 @@ require("better_escape").setup({
 	keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
 })
 
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
+
+require("nord").setup({
+	transparent = true, -- Enable this to disable setting the background color
+	terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
+	diff = { mode = "bg" }, -- enables/disables colorful backgrounds when used in diff mode. values : [bg|fg]
+	borders = true, -- Enable the border between verticaly split windows visible
+	errors = { mode = "bg" }, -- Display mode for errors and diagnostics
+	-- values : [bg|fg|none]
+	search = { theme = "vscode" }, -- theme for highlighting search results
+	-- values : [vim|vscode]
+	styles = {
+		-- Style to be applied to different syntax groups
+		-- Value is any valid attr-list value for `:help nvim_set_hl`
+		comments = { italic = true },
+		keywords = { bold = true },
+		functions = { bold = true },
+		variables = { bold = true },
+
+		-- To customize lualine/bufferline
+		bufferline = {
+			current = {},
+			modified = { italic = true },
+		},
+	},
+
+	on_highlights = function(highlights, colors)
+		highlights["@lsp.type.parameter"] = { fg = require("nord.utils").darken(colors.aurora.yellow, 0.90) }
+	end,
+})
+
+lvim.colorscheme = "nord"
+lvim.builtin.lualine.options = { theme = "nord" }
+lvim.builtin.bufferline.options = { separator_style = "thin" }
+lvim.builtin.bufferline.highlights = require("nord.plugins.bufferline").akinsho()
+
 -- The setup config table shows all available config options with their default values:
-require("presence"):setup({
+require("neocord").setup({
 	-- General options
-	auto_update = true, -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
-	neovim_image_text = "The One True Text Editor", -- Text displayed when hovered over the Neovim image
-	main_image = "file", -- Main image display (either "neovim" or "file")
-	client_id = "793271441293967371", -- Use your own Discord application client id (not recommended)
+	logo = "auto", -- "auto" or url
+	logo_tooltip = nil, -- nil or string
+	main_image = "language", -- "language" or "logo"
+	client_id = "1157438221865717891", -- Use your own Discord application client id (not recommended)
 	log_level = nil, -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
 	debounce_timeout = 10, -- Number of seconds to debounce events (or calls to `:lua package.loaded.presence:update(<filename>, true)`)
-	enable_line_number = false, -- Displays the current line number instead of the current project
 	blacklist = {}, -- A list of strings or Lua patterns that disable Rich Presence if the current file name, path, or workspace matches
-	buttons = true, -- Configure Rich Presence button(s), either a boolean to enable/disable, a static table (`{{ label = "<label>", url = "<url>" }, ...}`, or a function(buffer: string, repo_url: string|nil): table)
 	file_assets = {}, -- Custom file asset definitions keyed by file names and extensions (see default config at `lua/presence/file_assets.lua` for reference)
+	show_time = true, -- Show the timer
+	global_timer = false, -- if set true, timer won't update when any event are triggered
 
 	-- Rich Presence text options
 	editing_text = "Editing %s", -- Format string rendered when an editable file is loaded in the buffer (either string or function(filename: string): string)
@@ -172,10 +226,15 @@ require("presence"):setup({
 	reading_text = "Reading %s", -- Format string rendered when a read-only or unmodifiable file is loaded in the buffer (either string or function(filename: string): string)
 	workspace_text = "Working on %s", -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
 	line_number_text = "Line %s out of %s", -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
+	terminal_text = "Using Terminal", -- Format string rendered when in terminal mode.
 })
 
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
-local capabilities = require("lvim.lsp").common_capabilities()
-capabilities.offsetEncoding = { "utf-16" }
-local opts = { capabilities = capabilities }
-require("lvim.lsp.manager").setup("clangd", opts)
+lvim.builtin.which_key.mappings["t"] = {
+	name = "Diagnostics",
+	t = { "<cmd>TroubleToggle<cr>", "trouble" },
+	w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
+	d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
+	q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
+	l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
+	r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+}
