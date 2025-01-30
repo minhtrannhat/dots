@@ -21,7 +21,8 @@
        ;;japanese
        ;;layout            ; auie,ctsrnm is the superior home row
        :completion
-       (company +tng)            ; the ultimate code completion backend
+       ;;(company +tng)            ; the ultimate code completion backend
+       (corfu +orderless)
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        (ivy +fuzzy +icons)               ; a search engine for love and life
@@ -96,7 +97,7 @@
        pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
        ;;rgb               ; creating color strings
-       taskrunner        ; taskrunner for all your projects
+       ;; taskrunner        ; taskrunner for all your projects
        terraform         ; infrastructure as code
        tmux              ; an API for interacting with tmux
        ;;upload            ; map local to remote projects via ssh/ftp
@@ -107,7 +108,7 @@
        ;;agda              ; types of types of types of types...
        ;;beancount         ; mind the GAAP
        (cc +lsp)                ; C > C++ == 1
-       (clojure +lsp)           ; java with a lisp
+       (clojure +lsp +tree-sitter)           ; java with a lisp
        common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
@@ -115,7 +116,7 @@
        ;;data              ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
        ;;dhall
-       elixir            ; erlang done right
+       (elixir +lsp +tree-sitter)            ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
        (erlang +lsp)            ; an elegant language for a more civilized age

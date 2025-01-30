@@ -49,9 +49,6 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
                                         ;(unpin! t)
 
-;; gitty nitty
-(package! blamer :recipe (:host github :repo "artawower/blamer.el"))
-
 ;; evil parens
 (package! evil-cleverparens)
 
@@ -63,10 +60,6 @@
 (unpin! rustic)
 
 ;; orgy
-;; (package! treesit-auto)
-(package! org-pomodoro)
-(package! org-fragtog)
-(package! org-recur)
 (unpin! org-roam)
 (package! websocket)
 (package! org-roam-ui :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
