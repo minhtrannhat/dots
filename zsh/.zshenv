@@ -1,5 +1,5 @@
-export EDITOR=lvim
-export MANPAGER="lvim +Man!"
+export EDITOR=nvim
+export MANPAGER="nvim +Man!"
 export MOZ_ENABLE_WAYLAND=1
 
 path+=('/home/minhradz/.cargo/bin')
